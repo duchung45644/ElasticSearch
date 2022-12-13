@@ -1,0 +1,203 @@
+<div>
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+
+    <h2>Thông tin hồ sơ</h2>
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Trích yếu nội dung</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.Abstract"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày tạo</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.CreatedDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Mã định danh</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.DocCode"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số thứ tự trong hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.DocOrdinal"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tên loại</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.DocTypeId"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày hết hạn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.ExpiredDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tình trạng vật lý</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.Format"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.Number"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tên cơ quan tổ chức ban hành</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="documentArchive.PublishUnitName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Bản gốc hay không</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            [value]="documentArchive.IsDocumentOriginal?'Là bản gốc':'Không phải bản gốc'"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tài liệu đính kèm</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <div *ngFor="let att of documentArchive.attachmentOfDocumentArchives; let attIndex = index">
+                            <input
+                                matInput
+                                style="width: 100%; color: black; background-color: whitesmoke; margin: 1px"
+                                disabled="true"
+                                [value]="att.FileName"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-right">
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</div>

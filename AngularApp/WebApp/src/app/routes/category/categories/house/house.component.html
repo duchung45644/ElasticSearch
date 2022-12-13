@@ -1,0 +1,49 @@
+<breadcrumb></breadcrumb>
+<section class="m-b-8">
+    <mat-checkbox [(ngModel)]="showSearch" color="accent">Tìm kiếm</mat-checkbox>
+
+    <form *ngIf="showSearch">
+         <mat-form-field appearance="outline"  class="m-r-8">
+            <mat-label>Từ khoá</mat-label>
+            <input matInput [(ngModel)]="query.KeyWord" name="KeyWord">
+        </mat-form-field>
+
+        <button mat-mini-fab color="accent" class="m-r-8" (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        <button mat-mini-fab color="basic" class="m-r-8" (click)="clearsearch()" >
+            <mat-icon>refresh</mat-icon>
+        </button>
+
+    </form>
+</section>
+<section class="m-b-8">
+    <button class="m-r-8" mat-stroked-button color="primary" (click)="newHouse()">Thêm mới</button>
+</section>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [cellTemplate]="{ IsLocked: lockTpl }"
+          [loading]="isLoading"
+          [multiSelectable]="true"
+          [rowSelectable]="true"
+          [rowHover]="true"
+          [rowStriped]="true"
+          [showToolbar]="true"
+          [toolbarTitle]="'Danh sách Tài sản'"
+          [columnHideable]="true"
+          [columnMovable]="true"
+          [pageOnFront]="false"
+          [showPaginator]="true"
+          [length]="total"
+          [pageIndex]="query.PageIndex"
+          [pageSize]="query.PageSize"
+          [pageSizeOptions]="[10,20,50,100]"
+          (page)="getNextPage($event)"
+          (sortChange)="changeSort($event)"
+          (rowSelectionChange)="rowSelectionChangeLog($event)" >
+</mtx-grid>
+
+<ng-template #lockTpl let-row let-index="index" let-col="colDef">
+    <mat-slide-toggle [checked]="row.IsLocked"  disabled="true"></mat-slide-toggle>
+  </ng-template>

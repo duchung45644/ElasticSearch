@@ -1,0 +1,201 @@
+<form class="form-field-full" #borrowDetailsForm="ngForm" name="borrowDetailsForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <h2>Phê duyệt gia hạn hồ sơ</h2>
+
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số phiếu</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="borrowDetails.Votes"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mượn</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="FullName"
+                            #controlFullName="ngModel"
+                            [(ngModel)]="borrowDetails.FullName"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Title"
+                            #controlTitle="ngModel"
+                            [(ngModel)]="borrowDetails.Title"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày mượn </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="BorrowDate"
+                            #controlBorrowDate="ngModel"
+                            [(ngModel)]="borrowDetails.BorrowDate"
+                            [matDatepicker]="BorrowDate"
+                            [value]="BorrowDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #BorrowDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày hẹn trả </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="AppointmentDate"
+                            #controlAppointmentDate="ngModel"
+                            [(ngModel)]="borrowDetails.AppointmentDate"
+                            [matDatepicker]="AppointmentDate"
+                            [value]="AppointmentDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Yêu cầu gia hạn</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="ExtendDate"
+                            #controlExtendDate="ngModel"
+                            [(ngModel)]="borrowDetails.ExtendDate"
+                            [matDatepicker]="ExtendDate"
+                            [value]="ExtendDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #ExtendDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th style="width: 250px">Kí hiệu</th>
+                <th style="width: 250px">Tiêu đề</th>
+                <th style="width: 250px">Loại thành phần hồ sơ</th>
+                <th style="width: 250px">Hình thức mượn</th>
+                <th style="width: 250px">Ngày gia hạn</th>
+                <th style="width: 250px">Chức năng</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let opt of documentList; let rowIndex = index">
+                <td>
+                    <mat-checkbox name="role-Selected-{{rowIndex}}" [(ngModel)]="opt.Selected"> </mat-checkbox>
+                </td>
+                <td>{{opt.DocCode}}</td>
+                <td>{{opt.Abstract}}</td>
+                <td>{{opt.DocName}}</td>
+                <td>{{opt.AgreeStatus==1?"Bản gốc":opt.BorrowType==2?"Bản điện tử":"Cả 2 bản"}}</td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <input
+                            matInput
+                            name="ExtendDate"
+                            #controlExtendDate="ngModel"
+                            [(ngModel)]="opt.ExtendDate"
+                            [matDatepicker]="ExtendDate"
+                            [value]="ExtendDate"
+                        />
+                        <mat-datepicker-toggle [for]="ExtendDate" matSuffix> </mat-datepicker-toggle>
+                        <mat-datepicker #ExtendDate type="date"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <button
+                        mat-button
+                        color="primary"
+                        title="Xem chi tiết hồ sơ"
+                        (click)="viewDetails(opt.DocumentArchiveId)"
+                    >
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <button
+            class="m-r-8"
+            mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            [disabled]="borrowDetailsForm.invalid"
+            (click)="onSubmit(borrowDetailsForm.value)"
+        >
+            Gia Hạn
+        </button>
+
+        <button
+            mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            [disabled]="borrowDetailsForm.invalid"
+            (click)="refuseExtend(borrowDetailsForm.value)"
+        >
+            Từ chối
+        </button>
+    </div>
+</form>

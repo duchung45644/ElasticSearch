@@ -1,0 +1,135 @@
+<form class="form-field-full" #approveForm="ngForm" name="approveForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <h2 mat-dialog-title style="font-size: 400; text-decoration: underline">Thông Tin Đợt Đã Phê Duyệt</h2>
+
+    <mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="12px grid">
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <table style="margin-bottom: 10px; width: 100%">
+                    <tbody>
+                        <tr style="margin-bottom: 8px">
+                            <td style="border: 1px solid #fff; width: 170px">Mã</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput placeholder="Mã " name="Code" style="color: black" #controlCode="ngModel" [(ngModel)]="approve.Code" required disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Tên đợt hủy</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput placeholder="Tên đợt hủy " name="Name" style="color: black" #controlName="ngModel" [(ngModel)]="approve.Name" required disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Ngày tạo Đợt</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="CreatedDate" style="color: black" [value]="approve.CreatedDate | date: 'dd-MM-yyyy'" disabled="true" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <table style="margin-bottom: 10px; width: 100%">
+                    <tbody>
+                        <tr style="margin-bottom: 10px">
+                            <td style="border: 1px solid #fff; width: 170px">Người phê duyệt</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="Approver" #controlApprover="ngModel" style="color: black" [(ngModel)]="approve.Approver" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Ngày phê duyệt</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="ApproveDate" style="color: black" [value]="approve.ApproveDate | date: 'dd-MM-yyyy'" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Mô tả</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px" class="ng-binding">
+                                <input matInput placeholder="" style="color: black" name="Description" #controlDescription="ngModel" [(ngModel)]="approve.Description" disabled="true" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <table class="table table-noborder attlistfile">
+                    <tbody>
+                        <tr *ngFor="let att of approve.ListAttachment; let attIndex = index">
+                            <td>
+                                <a class="m-r-8" target="_blank" [href]="fileBaseUrl + att.FilePath">
+                                    {{ att.FileName }}
+                                </a>
+                            </td>
+                            <td class="right" style="width: 40px">
+                                <a mat-icon-button class="m-r-8" target="_blank" [href]="fileBaseUrl + att.FilePath">
+                                    <mat-icon color="basic">cloud_downloadx </mat-icon>
+                                </a>
+                            </td>
+                            <!-- <td class="right" style="width: 40px">
+                            <button type="button" mat-icon-button title="Xem" (click)="View(att)">
+                                <mat-icon color="basic">remove_red_eye</mat-icon>
+                            </button>
+                        </td> -->
+                            <!-- <td class="right" style="width: 40px">
+                            <button type="button" mat-icon-button title="Xóa" (click)="removeAttachmentofApprove(att)">
+                                <mat-icon color="basic">delete</mat-icon>
+                            </button>
+                        </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- <td style="white-space: pre-wrap;text-align: left;">
+                <app-upload (onUploadFinished)="uploadFinished($event)">
+                </app-upload>
+            </td> -->
+            </div>
+
+            <!-- <div fxFlex="100">
+                <pdf-viewer [src]="url" [render-text]="true" [original-size]="false" style="width: 490px; height: 500px"></pdf-viewer>
+            </div> -->
+        </div>
+    </mat-card>
+    <h2>Danh sách hồ sơ</h2>
+    <table class="table" ng-app="">
+        <thead>
+            <tr>
+                <th style="width: 150px">Mã hồ sơ</th>
+                <th style="width: 400px">Tên hồ sơ</th>
+                <th style="width: 100px">Ký hiệu</th>
+                <th style="width: 100px">Tổng số tờ</th>
+                <th style="width: 100px">Thời hạn bảo quản(Năm)</th>
+                <th style="width: 100px">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usediary of recordlist; let rowIndex = index">
+                <td style="white-space: pre-wrap">{{ usediary.FileCode }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.Title }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.FileNotation }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.TotalPaper }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.CateMaintenance }}</td>
+                <td style="white-space: pre-wrap">
+                    <button mat-button color="primary" title="Xem chi tiết hồ sơ" (click)="viewrecordDetails(usediary.RecordId)">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div class="text-right">
+        <button class="m-r-8" mat-raised-button color="primary" cdkFocusInitial [disabled]="approveForm.invalid" (click)="approveForm.form.valid && onSubmit(approveForm.value)">Lưu</button>
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+
+    </div> -->
+    <section>
+        <div class="text-right">
+            <button mat-raised-button mat-dialog-close>Đóng</button>
+        </div>
+    </section>
+</form>

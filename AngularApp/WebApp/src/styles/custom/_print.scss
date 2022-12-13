@@ -1,0 +1,98 @@
+@media screen {
+    body {
+       display: none;
+    }
+}
+
+@media print {
+    body {
+        font-size: 100%;
+        font-size: 14px !important;
+        font-family: "Times New Roman", Arial, serif;
+        visibility: visible;
+        line-height: 1.5384616;
+    }
+
+    #printSection, #printSection * {
+        font-size: 14px !important;
+        font-family: "Times New Roman", Arial, serif;
+        visibility: visible;
+    }
+
+    p {
+        margin: 0 0 6px;
+    }
+
+    h6, .h6 {
+        font-size: 15px;
+        margin: 0;
+    }
+
+    table {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+           font-size: 14px !important;
+        font-family: "Times New Roman", Arial, serif;
+    }
+
+    th {
+        font-weight: 500;
+    }
+
+    td, th {
+        padding: 2px;
+          font-size: 14px !important;
+        font-family: "Times New Roman", Arial, serif;
+    }
+    hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+    hr {
+        box-sizing: content-box;
+        height: 0;
+    }
+    #printSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    html, body {
+        height: 99%;
+        font-size: 14px !important;
+    }
+
+    /*#printSituationResultsOfPublicSector, #printSituationResultsOfPublicSector * {
+        font-size: 13pt !important;
+    }
+
+    #printHandoverTemplate, #printHandoverTemplate * {
+        font-size: 14pt !important;
+    }
+
+        #printHandoverTemplate #title-bienban {
+            font-size: 20pt !important;
+        }
+
+    .printSectionRecive #printDossierTrackingTemplate, .printSectionRecive #printDossierTrackingTemplate * {
+        font-size: 12pt !important;
+    }
+
+    .printSectionRecive, .printSectionRecive *, .printSectionRecive #printAppointmentTemplate * {
+        font-size: 12pt !important;
+    }*/
+
+    .print:last-child {
+        page-break-after: auto;
+    }
+
+    #printSection:last-child {
+        page-break-after: auto;
+    }
+}

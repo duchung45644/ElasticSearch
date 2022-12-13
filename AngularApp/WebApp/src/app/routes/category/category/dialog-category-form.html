@@ -1,0 +1,15 @@
+<form class="form-field-full" [formGroup]="form" (ngSubmit)="submit()" *ngIf="fields">
+  <a style="float: right; margin-top: -10px;" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </a>
+  <h2 mat-dialog-title  style="font-weight: 400;text-decoration: underline;">{{title}}</h2>
+  <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+  </formly-form>
+  <div class="text-right">
+    <button class="m-r-8" mat-raised-button color="primary" cdkFocusInitial
+            [disabled]="!form.valid">Lưu</button>
+    <button mat-raised-button mat-dialog-close>Đóng</button>
+
+  </div>
+</form>
+ 

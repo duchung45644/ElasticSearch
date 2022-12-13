@@ -1,0 +1,277 @@
+<breadcrumb></breadcrumb>
+
+<div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+        <mat-card>
+
+            <div class="form-field-full" fxLayout="row wrap" fxLayoutGap="0px grid">
+                <div fxFlex="20" fxFlex.lt-sm="100">
+                    <mat-card-title style="    color: black;
+                    text-decoration-line: underline;
+                    margin-top: 2px;">QUẢN LÝ KHO</mat-card-title>
+                    <div id="divTree">
+
+                        <span class="matches"></span>
+                        <div id="WarehouseTree"></div>
+                    </div>
+                </div>
+                <div fxFlex="80" fxFlex.lt-sm="100">
+                    <section class="m-l-8 m-b-8" *ngIf="!isShelf">
+                        <form class="form-field-full" #warehouseForm="ngForm" name="warehouseForm">
+                            <section class="m-b-8">
+                                <button class="m-r-8" mat-stroked-button color="primary" *ngIf="warehouse.Id" (click)="newWarehouse()"><i
+                                       class="fa fa-plus-square"></i>Thêm kho
+                                    </button>
+                                <button class="m-r-8" mat-stroked-button color="primary" *ngIf="warehouse.Id" (click)="newShelf()"><i
+                                       class="fa fa-user-plus"></i>Thêm kệ
+                                    </button>
+
+                                <!-- <button class="m-r-8" mat-stroked-button color="primary" *ngIf="warehouse.Id && warehouse.Id!=1" (click)="deleteWarehouse(warehouse.Id)"><i
+                                       class="fa fa-trash-o"></i>Xoá kho
+                                    </button> -->
+                                <!-- <button class="m-r-8" mat-stroked-button color="primary" (click)="deleteWarehouse(warehouse)" *ngIf="warehouse.Id"><i
+                                   class="fa fa-trash-o"></i>Xoá</button> -->
+                                <button class="m-r-8" mat-stroked-button color="primary" *ngIf="warehouse.Id && warehouse.Id!=1" (click)="deleteWarehouse(warehouse.Id)"><i
+                                       class="fa fa-trash-o"></i>Xoá </button>
+
+                                <button class="m-r-8" mat-raised-button color="primary" [disabled]="warehouseForm.invalid" (click)="warehouseForm.form.valid && onSubmit(warehouseForm.value)"><i
+                                       class="fa fa-save"></i>Lưu</button>
+
+                            </section>
+
+                            <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Tên kho</mat-label>
+                                        <input matInput placeholder="Tên kho" name="Name" #controlName="ngModel" [(ngModel)]="warehouse.Name" required>
+                                        <mat-error *ngIf="controlName.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="100" fxFlex.lt-sm="100" *ngIf="warehouse.Id!=1">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Thuộc kho</mat-label>
+                                        <mtx-select matInput name="ParentId" #controlParentId="ngModel" [(ngModel)]="warehouse.ParentId">
+                                            <mtx-option *ngFor="let opt of ListParents" [value]="opt.Id">
+                                                {{opt.Name }}
+                                            </mtx-option>
+                                        </mtx-select>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ký hiệu</mat-label>
+                                        <input matInput name="Ký hiệu" #controlCode="ngModel" [(ngModel)]="warehouse.Code" required>
+                                        <mat-error *ngIf="controlCode.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Số điện thoại kho</mat-label>
+                                        <input matInput placeholder="Số điện thoại kho" name="PhoneNumber" #controlPhoneNumber="ngModel" [(ngModel)]="warehouse.PhoneNumber" required>
+
+                                    </mat-form-field>
+
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Địa chỉ kho</mat-label>
+                                        <input matInput placeholder="Địa chỉ kho" name="Address" #controlAddress="ngModel" [(ngModel)]="warehouse.Address" required>
+
+                                    </mat-form-field>
+
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Vị Trí</mat-label>
+                                        <input matInput placeholder="Vị Trí" name="SortOrder" #controlSortOrder="ngModel" [(ngModel)]="warehouse.SortOrder" required type="number">
+                                    </mat-form-field>
+
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Loại kho</mat-label>
+
+                                        <mtx-select matInput name="TypeId" #controlTypeId="ngModel" [(ngModel)]="warehouse.TypeId">
+                                            <mtx-option *ngFor="let opt of categoryList" [value]="opt.CategoryId">
+                                                {{opt.CateName }}
+                                            </mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+
+                                    <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">
+                                        <mat-checkbox name='Status' [(ngModel)]="warehouse.Status">Hoạt động
+                                        </mat-checkbox>
+                                    </div>
+                                </div> -->
+                                <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Trạng thái<iframe src="" frameborder="0"></iframe></mat-label>
+
+                                        <mtx-select matInput name="Status" #controlStatus="ngModel" [(ngModel)]="warehouse.Status">
+                                            <mtx-option *ngFor="let opt of statusList" [value]="opt.StatusId">
+                                                {{opt.StatusName }}
+                                            </mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div> -->
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Trạng thái</mat-label>
+
+                                        <mtx-select matInput name="Status" #controlStatus="ngModel" [(ngModel)]="warehouse.Status" notFoundText="Không có dữ liệu">
+                                            <!-- <mtx-option *ngFor="let opt of statusList" [value]="opt.Id">
+                                                {{opt.StatusName }}
+                                            </mtx-option> -->
+
+                                            <mtx-option [value]="true">Hoạt động</mtx-option>
+                                            <mtx-option [value]="false">Dừng hoạt động</mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>--Mô tả--</mat-label>
+                                        <textarea matInput placeholder="Mô tả" name="Description" #controlDescription="ngModel" [(ngModel)]="warehouse.Description"></textarea>
+                                    </mat-form-field>
+
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </section>
+                    <section class="m-l-8 m-b-8" *ngIf="isShelf">
+                        <form class="form-field-full" #shelfForm="ngForm" name="shelfForm">
+                            <section class="m-b-8">
+
+                                <button class="m-r-8" mat-stroked-button color="primary" (click)="newShelf()"><i
+                                       class="fa fa-user-plus"></i>Thêm kệ
+                                    </button>
+
+                                <!-- <button class="m-r-8" mat-stroked-button color="primary" *ngIf="shelf.Id && shelf.Id!=1" (click)="deleteShelf(shelf.Id)"><i
+                                       class="fa fa-trash-o"></i>Xoá kệ
+                                    </button> -->
+                                <button class="m-r-8" mat-stroked-button color="primary" (click)="deleteshelf(shelf.Id)" *ngIf="shelf.Id && shelf.Id!=1"><i
+                                        class="fa fa-trash-o"></i>Xoá</button>
+
+                                <button class="m-r-8" mat-raised-button color="primary" [disabled]="shelfForm.invalid" (click)="shelfForm.form.valid && onSubmitShelf(shelfForm.value)"><i
+                                       class="fa fa-save"></i>Lưu</button>
+
+                            </section>
+
+                            <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Tên kệ</mat-label>
+                                        <input matInput placeholder="Tên " name="ShelfName" #controlShelfName="ngModel" [(ngModel)]="shelf.ShelfName" required>
+                                        <mat-error *ngIf="controlShelfName.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Ký hiệu </mat-label>
+                                        <input matInput placeholder="Code " name="Code" #controlCode="ngModel" [(ngModel)]="shelf.Code" required>
+                                        <mat-error *ngIf="controlCode.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Thuộc kho</mat-label>
+
+                                        <mtx-select matInput name="WarehouseId" #controlWarehouseId="ngModel" [(ngModel)]="shelf.WarehouseId" notFoundText="Không có dữ liệu">
+                                            <mtx-option *ngFor="let opt of ListParents" [value]="opt.Id">
+                                                {{opt.Name }}
+                                            </mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div>
+
+
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Loại kệ</mat-label>
+
+                                        <mtx-select matInput name="ShelfTypeId" #controlShelfTypeId="ngModel" [(ngModel)]="shelf.ShelfTypeId" notFoundText="Không có dữ liệu">
+                                            <mtx-option *ngFor="let opt of categoryListShelf" [value]="opt.CategoryId">
+                                                {{opt.CateName }}
+                                            </mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Sức chứa </mat-label>
+                                        <input matInput placeholder="Capacity " name="Capacity" #controlCapacity="ngModel" [(ngModel)]="shelf.Capacity">
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Trọng tải </mat-label>
+                                        <input matInput placeholder="Tonnage " name="Tonnage" #controlTonnage="ngModel" [(ngModel)]="shelf.Tonnage">
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Kích thước </mat-label>
+                                        <input matInput placeholder="Size " name="Size" #controlSize="ngModel" [(ngModel)]="shelf.Size">
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Vị trí </mat-label>
+                                        <input matInput placeholder="SortOrder " name="SortOrder" #controlSortOrder="ngModel" [(ngModel)]="shelf.SortOrder">
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Trạng thái</mat-label>
+
+                                        <mtx-select matInput name="Status" #controlStatus="ngModel" [(ngModel)]="shelf.Status" notFoundText="Không có dữ liệu">
+                                            <!-- <mtx-option *ngFor="let opt of statusList" [value]="opt.Id">
+                                                {{opt.StatusName }}
+                                            </mtx-option> -->
+
+                                            <mtx-option [value]="true">Hoạt động</mtx-option>
+                                            <mtx-option [value]="false">Dừng hoạt động</mtx-option>
+                                        </mtx-select>
+
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Mô tả</mat-label>
+                                        <input matInput placeholder="Description " name="Description" #controlDescription="ngModel" [(ngModel)]="shelf.Description">
+
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+
+        </mat-card>
+    </div>
+</div>

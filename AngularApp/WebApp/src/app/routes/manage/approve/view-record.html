@@ -1,0 +1,159 @@
+<form class="form-field-full" #recordForm="ngForm" name="recordForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+
+    <div class="row">
+        <div>
+            <h2 mat-dialog-title style="font-size: 400; text-decoration: underline">
+                Thông tin chi tiết hồ sơ : {{record.Title}}
+            </h2>
+            <table width="600">
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>Mã Hồ Sơ</td>
+                    <td>
+                        <input matInput name="FileCode" #controlFileCode="ngModel" [(ngModel)]="record.FileCode" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tiêu đề</td>
+                    <td>
+                        <input matInput name="Title" #controlTitle="ngModel" [(ngModel)]="record.Title" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ký Hiệu</td>
+                    <td>
+                        <input matInput name="FileNotation" #controlFileNotation="ngModel" [(ngModel)]="record.FileNotation" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tổng số tờ</td>
+                    <td>
+                        <input matInput name="TotalPaper" #controlTotalPaper="ngModel" [(ngModel)]="record.TotalPaper" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thời hạn bảo quản(Năm)</td>
+                    <td>
+                        <input matInput name="CateMaintenance" #controlCateMaintenance="ngModel" [(ngModel)]="record.CateMaintenance" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Chế độ sử dụng</td>
+                    <td>
+                        <input matInput name="CateRights" #controlCateRights="ngModel" [(ngModel)]="record.CateRights" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ngôn ngữ</td>
+                    <td>
+                        <input matInput name="CateLanguage" #controlCateLanguage="ngModel" [(ngModel)]="record.CateLanguage" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>NThời gian bắt đầu</td>
+                    <td>
+                        <input matInput name="StartDate" type="text" [value]="record.StartDate |date:'dd-MM-yyyy'" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thời gian kết thúc</td>
+                    <td>
+                        <input matInput name="CompleteDate" type="text" [value]="record.CompleteDate |date:'dd-MM-yyyy'" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Tác giả</td>
+                    <td>
+                        <input matInput name="RecordContent" #controlRecordContent="ngModel" [(ngModel)]="record.RecordContent" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số lượng tờ</td>
+                    <td>
+                        <input matInput name="TotalPaper" #controlTotalPaper="ngModel" [(ngModel)]="record.TotalPaper" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cán bộ tiếp nhận lưu trữ</td>
+                    <td>
+                        <input matInput name="ReceiveName" #controlReceiveName="ngModel" [(ngModel)]="record.ReceiveName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cán bộ phụ trách</td>
+                    <td>
+                        <input matInput name="ResponName" #controlResponName="ngModel" [(ngModel)]="record.ResponName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 20px"></div>
+        <div>
+            <h2 mat-dialog-title style="font-size: 400; text-decoration: underline">
+                Thông tin lưu trữ hồ sơ : {{record.Title}}
+            </h2>
+            <table width="600">
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                    <td>Kho lưu trữ</td>
+                    <td>
+                        <input matInput name="WareHouseName" #controlWareHouseName="ngModel" [(ngModel)]="record.WareHouseName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kệ lưu trữ</td>
+                    <td>
+                        <input matInput name="ShelfName" #controlShelfName="ngModel" [(ngModel)]="record.ShelfName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hộp lưu trữ</td>
+                    <td>
+                        <input matInput name="BoxName" #controlBoxName="ngModel" [(ngModel)]="record.BoxName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Người chuyển lưu trữ</td>
+                    <td>
+                        <input matInput name=" TransferStaff" #controlTransferStaff="ngModel" [(ngModel)]="record.TransferStaff" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số lượng bản lưu trữ</td>
+                    <td>
+                        <input matInput name=" NumberOfCopy" #controlNumberOfCopy="ngModel" [(ngModel)]="record.NumberOfCopy" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lĩnh vực hồ sơ</td>
+                    <td>
+                        <input matInput name=" FieldName" #controlFieldName="ngModel" [(ngModel)]="record.FieldName" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Các loại hình tài liệu khác</td>
+                    <td>
+                        <input matInput name=" OtherType" #controlOtherType="ngModel" [(ngModel)]="record.OtherType" style="color: black; background-color: whitesmoke" disabled="true" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br />
+    <div class="text-right">
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</form>

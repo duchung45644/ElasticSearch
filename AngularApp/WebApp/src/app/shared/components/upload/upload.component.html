@@ -1,0 +1,15 @@
+<div class="upload_group">
+  <div class="upload_group_button">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
+           style="display:none;">
+    <button type="button" [loading]="loadingUpload" 
+            mat-raised-button color="basic" (click)="file.click()">
+      <mat-icon>cloud_upload</mat-icon>
+      Chọn file tải lên
+    </button>
+  </div>
+  <div class="upload_group_message"  *ngIf="progress > 0">
+    <mtx-progress [value]="progress" [striped]="true" foreground="#169c05" background="#e0e0e0"> {{progress}}%
+    </mtx-progress>
+  </div>
+</div>

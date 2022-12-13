@@ -1,0 +1,197 @@
+<breadcrumb></breadcrumb>
+
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="Danh sách hồ sơ lưu trữ">
+        <section>
+            <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8 m-t-8">
+                <div fxFlex="30" fxFlex.lt-sm="100">
+                    <div fxFlex="25" fxFlex.lt-sm="100" class="m-r-8">
+                        <button mat-stroked-button color="primary" (click)="newRecord()">
+                            <i class="fa fa-plus-square"></i>Thêm Mới
+                        </button>
+                    </div>
+
+                    <div fxFlex="25" fxFlex.lt-sm="100" class="m-r-8">
+                        <button mat-stroked-button color="primary" (click)="deleteAllRecord()" [disabled]="isButtonDisabled">
+                            <i class="material-icons">delete</i>Xóa
+                        </button>
+                    </div>
+
+                    <div fxFlex="25" fxFlex.lt-sm="100" class="m-r-8">
+                        <button mat-stroked-button color="primary" [disabled]="isButtonDisabled" (click)="LostRecord()">
+                            <mat-icon>warning</mat-icon>Báo mất
+                        </button>
+                    </div>
+
+                    <div fxFlex="25" fxFlex.lt-sm="100">
+                        <button mat-stroked-button color="primary" (click)="BarcodeRecord()">
+                            <i class="fa fa-barcode"></i>In mã vạch hồ sơ
+                        </button>
+                        <button class="m-r-8" id="printbtn" printSectionId="print-section" ngxPrint style="display: none"></button>
+                    </div>
+                    <!-- <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Loại file</mat-label>
+                            <mtx-select matInput name="Extension" #controlExtension="ngModel" [(ngModel)]="Extension" required>
+                                <mtx-option *ngFor="let opt of doclist" [value]="opt.Extension">
+                                    {{ opt.Extension }}
+                                </mtx-option>
+                            </mtx-select>
+                        </mat-form-field>
+                    </div> -->
+                </div>
+
+                <div fxFlex="70" fxFlex.lt-sm="100" class="text-right">
+                    <button mat-stroked-button color="basic" (click)="clearsearch()" style="float: right">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw; float: right">
+                        <mat-label>Từ khoá tìm kiếm</mat-label>
+                        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+
+        <mtx-grid [data]="list" [columns]="columns" [loading]="isLoading" [multiSelectable]="true" [rowSelectable]="true" [rowHover]="true" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="true" [columnMovable]="true"
+            [pageOnFront]="false" [showPaginator]="true" [length]="total" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowSelectionChangeLog($event)"
+            [noResultText]="'Không có dữ liệu'">
+            >
+        </mtx-grid>
+
+        <div id="print-section" style="display: none">
+            <div id="print1">
+                <div fxLayout="row wrap" fxLayoutGap="8px grid">
+                    <table style="border: 1px solid grey; margin-right: 8px; margin-top: 8px" *ngFor="let item of RecordsWithImage">
+                        <tr>
+                            <td><img [src]="item.QRCodeStr | safeUrl" width="200" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Danh sách hồ sơ hình thành">
+        <section>
+            <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8 m-t-8">
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                    <div fxFlex="23" fxFlex.lt-sm="100">
+                        <button mat-stroked-button color="primary" (click)="DestroyRecords()" [disabled]="isButtonDisabled">
+                            <mat-icon>highlight_off</mat-icon>
+                            Tiêu hủy hồ sơ
+                        </button>
+                    </div>
+                    <div fxFlex="25" fxFlex.lt-sm="100">
+                        <button mat-stroked-button color="primary" [disabled]="isButtonDisabled" (click)="LostRecord()">
+                            <mat-icon>warning</mat-icon>Báo mất
+                        </button>
+                    </div>
+                </div>
+
+                <div fxFlex="50" fxFlex.lt-sm="100" class="text-right">
+                    <button mat-stroked-button color="basic" (click)="clearsearch()" style="float: right">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw; float: right">
+                        <mat-label>Từ khoá tìm kiếm</mat-label>
+                        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+        <mtx-grid [data]="list" [columns]="columnsrecord" [loading]="isLoading" [multiSelectable]="true" [rowSelectable]="true" [rowHover]="true" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="true" [columnMovable]="true"
+            [pageOnFront]="false" [showPaginator]="true" [length]="total" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowSelectionChangeLog($event)"
+            [noResultText]="'Không có dữ liệu'">
+            >
+        </mtx-grid>
+    </mat-tab>
+    <mat-tab label="Danh sách hồ sơ chờ tiêu hủy">
+        <section>
+            <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8 m-t-8">
+                <div fxFlex="30" fxFlex.lt-sm="100">
+                    <!-- <div fxFlex="25" fxFlex.lt-sm="100">
+                        <button mat-stroked-button color="primary" (click)="DestroyRecords()" [disabled]="isButtonDisabled">
+              <mat-icon>cached</mat-icon>
+              Gửi lại yêu cầu hủy hồ sơ 
+            </button>
+                    </div> -->
+                </div>
+
+                <div fxFlex="70" fxFlex.lt-sm="100" class="text-right">
+                    <button mat-stroked-button color="basic" (click)="clearsearch()" style="float: right">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw; float: right">
+                        <mat-label>Từ khoá tìm kiếm</mat-label>
+                        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+        <mtx-grid [data]="list" [columns]="columnswaitdestroy" [loading]="isLoading" [multiSelectable]="true" [rowSelectable]="true" [rowHover]="true" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="true" [columnMovable]="true"
+            [pageOnFront]="false" [showPaginator]="true" [length]="total" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowSelectionChangeLog($event)"
+            [noResultText]="'Không có dữ liệu'">
+            >
+        </mtx-grid>
+    </mat-tab>
+    <mat-tab label="Danh sách hồ sơ bị tiêu hủy">
+        <section>
+            <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8 m-t-8">
+                <div fxFlex="100" fxFlex.lt-sm="100" class="text-right">
+                    <button mat-stroked-button color="basic" (click)="clearsearch()" style="float: right">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw; float: right">
+                        <mat-label>Từ khoá tìm kiếm</mat-label>
+                        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+        <mtx-grid [data]="list" [columns]="columnsdestroy" [loading]="isLoading" [multiSelectable]="false" [rowSelectable]="false" [rowHover]="true" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="true" [columnMovable]="true"
+            [pageOnFront]="false" [showPaginator]="true" [length]="total" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowSelectionChangeLog($event)"
+            [noResultText]="'Không có dữ liệu'">
+            >
+        </mtx-grid>
+    </mat-tab>
+    <mat-tab label="Danh sách hồ sơ báo mất">
+        <section>
+            <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8 m-t-8">
+                <div fxFlex="100" fxFlex.lt-sm="100" class="text-right">
+                    <button mat-stroked-button color="basic" (click)="clearsearch()" style="float: right">
+                        <mat-icon>refresh</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw; float: right">
+                        <mat-label>Từ khoá tìm kiếm</mat-label>
+                        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+        <mtx-grid [data]="list" [columns]="columnslostrecord" [loading]="isLoading" [multiSelectable]="false" [rowSelectable]="false" [rowHover]="true" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="true" [columnMovable]="true"
+            [pageOnFront]="false" [showPaginator]="true" [length]="total" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowSelectionChangeLog($event)"
+            [noResultText]="'Không có dữ liệu'">
+            >
+        </mtx-grid>
+    </mat-tab>
+</mat-tab-group>

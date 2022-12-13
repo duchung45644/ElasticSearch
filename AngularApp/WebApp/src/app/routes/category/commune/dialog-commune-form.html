@@ -1,0 +1,84 @@
+<form class="form-field-full" #communeForm="ngForm" name="communeForm">
+  <a style="float: right; margin-top: -10px;" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+</a>
+  <h2 mat-dialog-title *ngIf="!commune.Id" style="font-weight: 400;text-decoration: underline;">Thêm Mới Xã/phường</h2>
+  <h2 mat-dialog-title *ngIf="commune.Id" style="font-weight: 400;text-decoration: underline;">Thông Tin Xã/phường :{{commune.Name}}</h2>
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên </mat-label>
+          <input matInput placeholder="Tên " name="Name" #controlName="ngModel"
+                 [(ngModel)]="commune.Name"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Mã</mat-label>
+          <input matInput placeholder="Mã" name="Code" #controlCode="ngModel"
+                 [(ngModel)]="commune.Code"
+                 required>
+          <mat-error *ngIf="controlCode.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tỉnh/thành</mat-label>
+
+          <mtx-select matInput name="ProvinceId" #controlProvinceId="ngModel"
+                      [(ngModel)]="commune.ProvinceId"
+                      (ngModelChange)="getDistrictByProvice($event)">
+            <mtx-option *ngFor="let opt of provinceList" [value]="opt.Id">
+              {{opt.Name }}
+            </mtx-option>
+          </mtx-select>
+          <mat-hint>chọn tỉnh thành</mat-hint>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Quận/huyện</mat-label>
+
+          <mtx-select matInput name="DistrictId" #controlDistrictId="ngModel"
+                      [(ngModel)]="commune.DistrictId">
+            <mtx-option *ngFor="let opt of districtList" [value]="opt.Id">
+              {{opt.Name }}
+            </mtx-option>
+          </mtx-select>
+          <mat-hint>chọn quận/huyện</mat-hint>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Ghi chú</mat-label>
+          <textarea matInput placeholder="" name="Desciption" #controlDesciption="ngModel"
+                 [(ngModel)]="commune.Desciption"></textarea>
+        </mat-form-field>
+
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+        <mat-label>&nbsp;</mat-label>
+          <mat-checkbox  matInput  name="IsLocked"  [(ngModel)]="commune.IsLocked">Khoá
+          </mat-checkbox>
+        
+      </div>
+
+
+    </div>
+
+    <div class="text-right">
+    <button mat-raised-button color="primary" cdkFocusInitial
+            [disabled]="communeForm.invalid"
+            (click)="communeForm.form.valid && onSubmit(communeForm.value)">Lưu</button>
+    </div>
+
+</form>

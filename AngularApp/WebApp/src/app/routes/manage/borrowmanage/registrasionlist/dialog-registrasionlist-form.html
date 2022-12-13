@@ -1,0 +1,237 @@
+<form class="form-field-full" #registrasionlistForm="ngForm" name="registrasionlistForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <h2 mat-dialog-title *ngIf="!registrasionlist.Id" style="font-size: 800; text-decoration: underline">
+        Thêm mới phiếu mượn
+    </h2>
+    <h2 mat-dialog-title *ngIf="registrasionlist.Id" style="font-size: 800; text-decoration: underline">
+        Thông tin phiếu mượn:{{registrasionlist.Name}}
+    </h2>
+
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Số phiếu</mat-label>
+                <input
+                    matInput
+                    placeholder="Số phiếu"
+                    name="Votes"
+                    #controlName="ngModel"
+                    [(ngModel)]="registrasionlist.Votes"
+                    required
+                />
+
+                <mat-error *ngIf="controlName.errors?.required"> {{'validations.required' | translate}} </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Người mượn</mat-label>
+                <mtx-select
+                    matInput
+                    name="RegisterUser"
+                    #controlRegisterUser="ngModel"
+                    [(ngModel)]="registrasionlist.RegisterUser"
+                >
+                    <mtx-option *ngFor="let opt of UserList" [value]="opt.Id"> {{opt.FullName}} </mtx-option>
+                </mtx-select>
+                <mat-hint>Chọn tên người mượn</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Giấy giới thiệu số</mat-label>
+                <input
+                    matInput
+                    placeholder="Giấy giới thiệu số"
+                    name="Referral"
+                    #controlName="ngModel"
+                    [(ngModel)]="registrasionlist.Referral"
+                />
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Nơi gửi</mat-label>
+                <input
+                    matInput
+                    placeholder="Nơi gửi"
+                    name="SendingPlace"
+                    #controlCode="ngModel"
+                    [(ngModel)]="registrasionlist.SendingPlace"
+                />
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100" fxFlexAlign="start">
+            <div class="row">
+                <div class="col-sm-7" style="margin-top: 21px" *ngIf="registrasionlist.DecisionFile">
+                    {{registrasionlist.DecisionFile}}
+                </div>
+                <div class="col-sm-5">
+                    <app-upload (onUploadFinished)="uploadFinished($event)"> </app-upload>
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Cơ quan, đơn vị</mat-label>
+
+                <mtx-select
+                    matInput
+                    name="UnitId"
+                    #controlUnitId="ngModel"
+                    [(ngModel)]="registrasionlist.UnitId"
+                    (ngModelChange)="getfond($event)"
+                    required
+                >
+                    <mtx-option *ngFor="let opt of departmentList" [value]="opt.Id"> {{opt.Name}} </mtx-option>
+                </mtx-select>
+                <mat-error *ngIf="controlName.errors?.required"> {{'validations.required' | translate}} </mat-error>
+                <mat-hint>chọn đơn vị phòng ban</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Phông</mat-label>
+                <mtx-select
+                    matInput
+                    name="FondId"
+                    #controlFondId="ngModel"
+                    [(ngModel)]="registrasionlist.FondId"
+                    notFoundText="Không có dữ liệu"
+                    (ngModelChange)="getrecordbyunit($event)"
+                    required
+                >
+                    <mtx-option *ngFor="let opt of fondList" [value]="opt.Id"> {{opt.FondName}} </mtx-option>
+                </mtx-select>
+                <mat-error *ngIf="controlName.errors?.required"> {{'validations.required' | translate}} </mat-error>
+                <mat-hint>chọn phông</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Giấy CMT số</mat-label>
+                <input
+                    matInput
+                    placeholder="Giấy CMT số"
+                    name="CardId"
+                    #controlCode="ngModel"
+                    [(ngModel)]="registrasionlist.CardId"
+                />
+            </mat-form-field>
+        </div>
+        <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Hồ sơ</mat-label>
+                <mtx-select
+                    matInput
+                    name="RecordId"
+                    #controlId="ngModel"
+                    [(ngModel)]="registrasionlist.RecordId"
+                    (ngModelChange)="getInfoByRegistrasionlist($event)"
+                    required
+                >
+                    <mtx-option *ngFor="let opt of fileList" [value]="opt.Id"> {{opt.Title}} </mtx-option>
+                </mtx-select>
+                <mat-error *ngIf="controlName.errors?.required"> {{'validations.required' | translate}} </mat-error>
+                <mat-hint>chọn hồ sơ</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50">
+            <mat-form-field appearance="outline">
+                <mat-label>Ngày hẹn trả</mat-label>
+                <input
+                    matInput
+                    name="AppointmentDate"
+                    #controlAppointmentDate="ngModel"
+                    [(ngModel)]="registrasionlist.AppointmentDate"
+                    [matDatepicker]="AppointmentDate"
+                    [value]="AppointmentDate"
+                />
+                <mat-datepicker-toggle [for]="AppointmentDate" matSuffix> </mat-datepicker-toggle>
+                <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="8px grid" style="width: 100%">
+        <mat-dialog-content>
+            <h2 mat-dialog-title style="color: black; text-decoration-line: underline; margin-top: 2px"></h2>
+        </mat-dialog-content>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <!-- <th><mat-checkbox name="CheckBox" [(ngModel)]="CheckAll" (ngModelChange)="CheckAllList($event)">
+        </mat-checkbox></th> -->
+                <th style="width: 250px">Kí hiệu</th>
+                <th style="width: 250px">Tiêu đề</th>
+                <th style="width: 200px">Loại thành phần hồ sơ</th>
+                <th style="width: 200px">Hình thức mượn</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usediary of InforList; let rowIndex = index">
+                <td>
+                    <div>
+                        <mat-checkbox
+                            name="SelectForm"
+                            [(ngModel)]="usediary.Selected"
+                            [disabled]="usediary.disable"
+                            (change)="checkValue(usediary)"
+                            required
+                        >
+                        </mat-checkbox>
+                    </div>
+                </td>
+                <td style="white-space: pre-wrap">{{ usediary.DocCode }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.Abstract }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.DocName }}</td>
+                <td>
+                    <div fxFlex="70" fxFlex.lt-sm="100">
+                        <mat-form-field appearance="outline">
+                            <mtx-select
+                                matInput
+                                name="BorrowType"
+                                #controlBorrowType="ngModel"
+                                [(ngModel)]="usediary.BorrowType"
+                                required
+                            >
+                                <mtx-option *ngFor="let opt of usediary.FormatList" [value]="opt.Id">
+                                    {{opt.FormatName}}
+                                </mtx-option>
+                            </mtx-select>
+
+                            <mat-hint>chọn kiểu mượn</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <button
+            class="m-r-8"
+            mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            [disabled]="registrasionlistForm.invalid"
+            (click)="registrasionlistForm.form.valid && onSubmit(registrasionlistForm.value)"
+        >
+            Lập phiếu mượn
+        </button>
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</form>

@@ -1,0 +1,225 @@
+<form class="form-field-full" #documentArchivesForm="ngForm" name="documentArchivesForm">
+    <a style="margin-top: -10px; float: right" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <div fxLayout="row" class="matero-row">
+        <div fxFlex="50" fxFlex.lt-sm="100" class="matero-col">
+            <mat-card>
+                <mat-card-title style="font-weight: 400; font-size: larger; text-decoration: underline">
+                    Thông tin thành phần hồ sơ</mat-card-title
+                >
+
+                <div fxLayout="row wrap" class="matero-row">
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mã định danh </mat-label>
+                            <input
+                                matInput
+                                placeholder="Mã định danh "
+                                name="DocCode"
+                                #controlDocCode="ngModel"
+                                [(ngModel)]="documentArchive.DocCode"
+                                disabled="true"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Trích yếu nội dung </mat-label>
+                            <input
+                                matInput
+                                placeholder="Trích yếu nội dung "
+                                name="Abstract"
+                                #controlAbstract="ngModel"
+                                [(ngModel)]="documentArchive.Abstract"
+                                disabled="true"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Số thứ tự trong hồ sơ</mat-label>
+                            <input
+                                matInput
+                                placeholder="Số thứ tự  trong hồ sơ"
+                                name="DocOrdinal"
+                                #controlDocOrdinal="ngModel"
+                                [(ngModel)]="documentArchive.DocOrdinal"
+                                disabled="true"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tên loại </mat-label>
+                            <mtx-select
+                                matInput
+                                name="DocTypeId"
+                                #controlDocTypeId="ngModel"
+                                [(ngModel)]="documentArchive.DocTypeId"
+                                required
+                                [disabled]="true"
+                            >
+                                <mtx-option *ngFor="let opt of catalogList" [value]="opt.Id">
+                                    {{ opt.Name }}
+                                </mtx-option>
+                            </mtx-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Số </mat-label>
+                            <input
+                                matInput
+                                placeholder="Số "
+                                name="Number"
+                                #controlNumber="ngModel"
+                                [(ngModel)]="documentArchive.Number"
+                                disabled="true"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tên cơ quan tổ chức ban hành </mat-label>
+                            <input
+                                matInput
+                                placeholder="Tên cơ quan tổ chức ban hành "
+                                name="PublishUnitName"
+                                #controlPublishUnitName="ngModel"
+                                [(ngModel)]="documentArchive.PublishUnitName"
+                                disabled="true"
+                            />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tình trạng vật lý</mat-label>
+                            <mtx-select
+                                matInput
+                                name="Format"
+                                #controlFormat="ngModel"
+                                [(ngModel)]="documentArchive.Format"
+                                required
+                                [disabled]="true"
+                            >
+                                <mtx-option *ngFor="let opt of ConditionList" [value]="opt.Id">
+                                    {{ opt.ConditionName }}
+                                </mtx-option>
+                            </mtx-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ngày hết hạn</mat-label>
+                            <input
+                                placeholder="Ngày hết hạn"
+                                matInput
+                                name="ExpiredDate"
+                                #controlExpiredDate="ngModel"
+                                [(ngModel)]="documentArchive.ExpiredDate"
+                                [matDatepicker]="ExpiredDate"
+                                [value]="ExpiredDate"
+                                disabled="true"
+                            />
+                            <mat-datepicker-toggle [for]="ExpiredDate" matSuffix> </mat-datepicker-toggle>
+                            <mat-datepicker #ExpiredDate type="date"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100">
+                        <mat-label class="m-r-8">Là bản gốc</mat-label>
+                        <mat-checkbox
+                            matInput
+                            name="IsDocumentOriginal"
+                            [(ngModel)]="documentArchive.IsDocumentOriginal"
+                            disabled="true"
+                        >
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxLayout="row" class="matero-row">
+            <div fxFlex="100" fxFlex.lt-sm="100" class="matero-row m-l-8">
+                <div fxLayout="row wrap" class="matero-row">
+                    <div fxFlex="100">
+                        <table style="width: 100%">
+                            <tbody>
+                                <td style="white-space: pre-wrap">
+                                    <table>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="
+                                                    let att of documentArchive.attachmentOfDocumentArchives;
+                                                    let attIndex = index
+                                                "
+                                            >
+                                                <td>
+                                                    <a
+                                                        class="m-r-8"
+                                                        target="_blank"
+                                                        [href]="fileBaseUrl + att.FilePath"
+                                                    >
+                                                        {{ att.FileName }}
+                                                    </a>
+                                                </td>
+                                                <td class="right" style="width: 40px">
+                                                    <a
+                                                        mat-icon-button
+                                                        class="m-r-8"
+                                                        target="_blank"
+                                                        [href]="fileBaseUrl + att.FilePath"
+                                                    >
+                                                        <mat-icon color="basic">cloud_download </mat-icon>
+                                                    </a>
+                                                </td>
+                                                <td class="right" style="width: 40px">
+                                                    <button
+                                                        type="button"
+                                                        mat-icon-button
+                                                        title="Xem"
+                                                        (click)="View(att)"
+                                                    >
+                                                        <mat-icon color="basic">remove_red_eye</mat-icon>
+                                                    </button>
+                                                </td>
+                                                <!-- <td class="right" style="width: 40px">
+                                                    <button type="button" mat-icon-button title="Xóa" (click)="removeAttachmentDossiers(att)">
+                                                        <mat-icon color="basic">delete</mat-icon>
+                                                    </button>
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <!-- <td style="white-space: pre-wrap;text-align: left;">
+                                    <app-upload (onUploadFinished)="uploadFinished($event)">
+                                    </app-upload>
+                                </td> -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div fxFlex="100">
+                        <iframe [src]="url | safeUrl" style="width: 800px; height: 500px"></iframe>
+                        <!-- <pdf-viewer [src]="url"
+                                    [render-text]="true"
+                                    [original-size]="false"
+                                    style="width: 800px; height: 500px"></pdf-viewer> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right">
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</form>

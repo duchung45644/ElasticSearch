@@ -1,0 +1,70 @@
+<breadcrumb></breadcrumb>
+
+<section>
+  <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8">
+    <div fxFlex="20" fxFlex.lt-sm="100">
+      <button class="m-r-8" mat-stroked-button color="primary"
+      (click)="newDistrict()"><i
+     class="fa fa-plus-square"></i>Thêm Mới
+  </button>
+
+    </div>
+
+    <div fxFlex="80" fxFlex.lt-sm="100" class="text-right">
+
+      <button mat-stroked-button color="basic" (click)="clearsearch()"
+              style="float: right;">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" class="m-r-8" style="float: right;"
+              (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-form-field appearance="outline"  class="mat-mini-input m-r-8" style=" float: right;">
+        <mat-label>Tỉnh/thành</mat-label>
+        <mtx-select matInput name="ProvinceId" #controlProvinceId="ngModel"
+                    [(ngModel)]="query.ProvinceId">
+          <mtx-option *ngFor="let opt of provinceList" [value]="opt.Id">
+            {{opt.Name }}
+          </mtx-option>
+        </mtx-select>
+      </mat-form-field >
+      <mat-form-field appearance="outline" class="mat-mini-input m-r-8"
+                      style="width:10vw; float: right;">
+        <mat-label>Từ khoá tìm kiếm</mat-label>
+        <input matInput [(ngModel)]="query.KeyWord" name="KeyWord">
+      </mat-form-field>
+    </div>
+
+  </div>
+</section>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [cellTemplate]="{ IsLocked: lockTpl }"
+          [loading]="isLoading"
+          [multiSelectable]="false"
+          [rowSelectable]="false"
+          [rowHover]="true"
+          [rowStriped]="false"
+          [showToolbar]="true"
+          [columnMenuButtonText] = "'Cột Hiển Thị'"
+          [toolbarTitle]="'Danh Sách Quận Huyện'"
+          [columnHideable]="true"
+          [columnMovable]="true"
+          [pageOnFront]="false"
+          [showPaginator]="true"
+          [length]="total"
+          [pageIndex]="query.PageIndex"
+          [pageSize]="query.PageSize"
+          [pageSizeOptions]="[10,20,50,100]"
+          (page)="getNextPage($event)"
+          (sortChange)="changeSort($event)"
+          (rowSelectionChange)="rowSelectionChangeLog($event)"
+          [noResultText] = "'Không có dữ liệu'">
+  >
+</mtx-grid>
+
+<ng-template #lockTpl let-row let-index="index" let-col="colDef">
+  <mat-slide-toggle [checked]="row.IsLocked" disabled="true"></mat-slide-toggle>
+</ng-template>

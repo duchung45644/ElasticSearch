@@ -1,0 +1,120 @@
+<breadcrumb></breadcrumb>
+
+<div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+        <mat-card>
+            <mat-card-title>Cập nhật Thông báo</mat-card-title>
+
+            <mtx-loader [loading]="loadingContent" color="accent" hasBackdrop="true">
+                <form class="form-field-full" #informationForm="ngForm" name="informationForm">
+                    <div fxLayout="row wrap" class="matero-row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ngày hết hạn</mat-label>
+                            <mat-datepicker-toggle matSuffix [for]="pickerExpiredDate"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerExpiredDate></mat-datepicker>
+                            <input
+                                matInput
+                                name="ExpiredDate"
+                                #controlExpiredDate="ngModel"
+                                (dateInput)="getExpiredDateString($event.value.format('DD/MM/YYYY'))"
+                                [(ngModel)]="information.ExpiredDate"
+                                [matDatepicker]="pickerExpiredDate"
+                                (focus)="pickerExpiredDate.open()"
+                                placeholder="Chọn ngày"
+                            />
+                        </mat-form-field>
+
+                        <div fxFlex="100" fxFlex.lt-sm="100" class="matero-col">
+                            <mtx-split direction="horizontal" restrictMove="true">
+                                <mtx-split-pane size="35">
+                                    <ngx-treeview [items]="_treeViewItem" (selectedChange)="onSelectedChange($event)">
+                                    </ngx-treeview>
+                                </mtx-split-pane>
+                                <mtx-split-pane size="65">
+                                    <p>
+                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                                        consequuntur magni dolores eodolor sit amet, consectetur, adipisci velit, sed
+                                        quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                        quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                                        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+                                        autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+                                        molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+                                        pariatur?
+                                    </p>
+                                </mtx-split-pane>
+                            </mtx-split>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.lt-sm="100">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tiêu đề</mat-label>
+                                <input
+                                    matInput
+                                    name="Title"
+                                    #controlTitle="ngModel"
+                                    [(ngModel)]="information.Title"
+                                    required
+                                />
+                                <mat-error *ngIf="controlTitle.errors?.required">
+                                    {{ 'validations.required' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div fxFlex="25" fxFlex.lt-sm="50">
+                             <mat-form-field appearance="outline"  >
+                              <mat-label>Ngày hết hạn</mat-label>
+                              <input matInput [matDatepicker]="picker"  name="ExpiredDate" #controlExpiredDate="ngModel"
+                              [(ngModel)]="information.ExpiredDate">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>  -->
+                        <div fxFlex="100" fxFlex.lt-sm="100" class="m-b-16">
+                            <mat-label>Nội dung</mat-label>
+                            <angular-editor
+                                [config]="editorConfig"
+                                id="Description"
+                                name="Description"
+                                #controlDescription="ngModel"
+                                [(ngModel)]="information.Description"
+                            >
+                            </angular-editor>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.lt-sm="100" class="m-b-16">
+                            <mat-label>Upload file</mat-label>
+                            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+
+                            <div style="width: 100%; clear: both">
+                                <br />
+                                <a
+                                    mat-icon-button
+                                    *ngIf="information.ImageUrl"
+                                    class="m-r-8"
+                                    target="_blank"
+                                    [href]="fileBaseUrl + information.ImageUrl"
+                                >
+                                    <mat-icon color="basic">cloud_download</mat-icon> Xem tập tin
+                                </a>
+                                <br />
+                                <mat-hint>Tải lên tập tin định dạng pdf</mat-hint>
+                            </div>
+                        </div>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            cdkFocusInitial
+                            [disabled]="informationForm.invalid"
+                            (click)="informationForm.form.valid && onSubmit(informationForm.value)"
+                        >
+                            Lưu
+                        </button>
+                    </div>
+                </form>
+            </mtx-loader>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+<form class="form-field-full" #logbookborrowedForm="ngForm" name="logbookborrowedForm">
+  <a style="float: right; margin-top: -10px;" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </a>
+  <h2> Xem chi tiết </h2>
+
+  <div fxLayout="row" fxLayoutGap="0px">
+    <div fxFlex="50" class="m-r-8">
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label>Số phiếu</mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="Votes" #controlVotes="ngModel" [(ngModel)]="logbookborrowed.Votes"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label>Người mượn</mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="FullName" #controlFullFullName="ngModel"
+                   [(ngModel)]="logbookborrowed.FullName"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Ngày mượn </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReceiveDate" #controlFullReceiveDate="ngModel"
+                   [(ngModel)]="logbookborrowed.ReceiveDate"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Tình trạng khi mượn </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReceiveStatus" #controlReceiveStatus="ngModel"
+                   [(ngModel)]="logbookborrowed.ReceiveStatus"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Người cho mượn </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="LenderId" #controlLenderId="ngModel"
+                   [(ngModel)]="logbookborrowed.LenderId"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Ghi chú khi mượn </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReceiveNote" #controlReceiveNote="ngModel"
+                   [(ngModel)]="logbookborrowed.ReceiveNote"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="50">
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label>Người trả</mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReimburseName" #controlReimburseName="ngModel"
+                   [(ngModel)]="logbookborrowed.ReimburseName"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label>Ngày trả</mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReimburseDate" #controlReimburseDate="ngModel"
+                   [(ngModel)]="logbookborrowed.ReimburseDate"
+                   [matDatepicker]="ReimburseDate" [value]="ReimburseDate"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+            <mat-datepicker #ReimburseDate type="date"></mat-datepicker>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Tình trạng khi trả </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReimburseStatus" #controlReimburseStatus="ngModel"
+                   [(ngModel)]="logbookborrowed.ReimburseStatus"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Người nhận khi trả </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReimburseStaffId" #controlReimburseStaffId="ngModel"
+                   [(ngModel)]="logbookborrowed.ReimburseStaffId"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <mat-label> Ghi chú khi trả </mat-label>
+          </div>
+          <div fxFlex="50">
+            <input matInput name="ReimburseNote" #controlReimburseNote="ngModel"
+                   [(ngModel)]="logbookborrowed.ReimburseNote"
+                   style="color: black;background-color: whitesmoke; margin: 5px;" disabled="true">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

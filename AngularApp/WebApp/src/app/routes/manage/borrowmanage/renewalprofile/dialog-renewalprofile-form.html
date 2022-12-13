@@ -1,0 +1,203 @@
+<form class="form-field-full" #renewalprofileForm="ngForm" name="renewalprofileForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <h2>Ghi gia hạn hồ sơ</h2>
+
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số phiếu</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="renewalprofile.Votes"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mượn</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="FullName"
+                            #controlFullName="ngModel"
+                            [(ngModel)]="renewalprofile.FullName"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Title"
+                            #controlTitle="ngModel"
+                            [(ngModel)]="renewalprofile.Title"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày mượn </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="BorrowDate"
+                            #controlBorrowDate="ngModel"
+                            [(ngModel)]="renewalprofile.BorrowDate"
+                            [matDatepicker]="BorrowDate"
+                            [value]="BorrowDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #BorrowDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày hẹn trả </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="AppointmentDate"
+                            #controlAppointmentDate="ngModel"
+                            [(ngModel)]="renewalprofile.AppointmentDate"
+                            [matDatepicker]="AppointmentDate"
+                            [value]="AppointmentDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Gia hạn đến ngày </mat-label>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ngày gia hạn</mat-label>
+                            <input
+                                matInput
+                                name="ExtendDate"
+                                #controlExtendDate="ngModel"
+                                [(ngModel)]="renewalprofile.ExtendDate"
+                                (ngModelChange)="bindingDate($event)"
+                                [matDatepicker]="ExtendDate"
+                                [value]="ExtendDate"
+                                [min]="renewalprofile.AppointmentDate"
+                                [max]="renewalprofile.ExtendDate"
+                                style="color: black"
+                            />
+                            <mat-datepicker-toggle [for]="ExtendDate" matSuffix> </mat-datepicker-toggle>
+                            <mat-datepicker #ExtendDate type="date"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+
+                <th style="width: 200px">Kí hiệu</th>
+                <th style="width: 200px">Tiêu đề</th>
+                <th style="width: 200px">Loại thành phần hồ sơ</th>
+                <th style="width: 200px">Hình thức mượn</th>
+                <th style="width: 200px">Ngày gia hạn</th>
+                <th style="width: 200px">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usediary of InforList; let rowIndex = index">
+                <td>
+                    <mat-checkbox
+                        *ngIf="!usediary.ReturnStatus"
+                        name="role-Selected-{{rowIndex}}"
+                        [(ngModel)]="usediary.Selected"
+                        required
+                    >
+                    </mat-checkbox>
+                </td>
+                <td style="white-space: pre-wrap">{{ usediary.DocCode }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.Abstract }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.DocName}}</td>
+                <td style="white-space: pre-wrap">
+                    {{usediary.AgreeStatus==1?"Bản gốc":usediary.BorrowType==2?"Bản điện tử":"Cả 2 bản"}}
+                </td>
+                <td>
+                    <mat-form-field appearance="outline" *ngIf="!usediary.ReturnStatus">
+                        <mat-label>Ngày gia hạn</mat-label>
+                        <input
+                            matInput
+                            name="ExtendDate"
+                            #controlExtendDate="ngModel"
+                            [(ngModel)]="usediary.ExtendDate"
+                            [matDatepicker]="ExtendDate"
+                            required
+                            [value]="ExtendDate"
+                            style="color: black"
+                        />
+                        <mat-datepicker-toggle [for]="ExtendDate" matSuffix> </mat-datepicker-toggle>
+                        <mat-datepicker #ExtendDate type="date"></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <button mat-button color="primary" (click)="editDocumentArchive(usediary)">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <button
+            class="m-r-8"
+            mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            [disabled]="renewalprofileForm.invalid"
+            (click)="onSubmit(renewalprofileForm.value)"
+        >
+            Gửi yêu cầu gia Hạn
+        </button>
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</form>

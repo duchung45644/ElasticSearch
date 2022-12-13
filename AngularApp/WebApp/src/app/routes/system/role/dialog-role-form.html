@@ -1,0 +1,47 @@
+<form class="form-field-full" #roleForm="ngForm" name="roleForm">
+  <h2 mat-dialog-title *ngIf="!role.Id">Thêm mới vai trò</h2>
+  <h2 mat-dialog-title *ngIf="role.Id">Thông tin vai trò</h2>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên vai trò</mat-label>
+          <input matInput placeholder="Tên vai trò" name="Name" #controlRoleName="ngModel"
+                 [(ngModel)]="role.Name"
+                 required>
+          <mat-error *ngIf="controlRoleName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+         <mat-form-field appearance="outline"  appearance="outline">
+          <mat-label>Mô tả</mat-label>
+          <input matInput placeholder="Mô tả" name="Description" [(ngModel)]="role.Description">
+
+        </mat-form-field>
+
+        <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-checkbox name='IsLocked' [(ngModel)]="role.IsLocked">Khoá
+          </mat-checkbox>
+        </div>
+
+
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+        <div id="ActionTree"></div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" cdkFocusInitial
+            [disabled]="roleForm.invalid"
+            (click)="roleForm.form.valid && onSubmit(roleForm.value)">Save</button>
+  </mat-dialog-actions>
+
+</form>

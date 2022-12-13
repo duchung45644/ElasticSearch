@@ -1,0 +1,76 @@
+<form class="form-field-full" #rightForm="ngForm" name="rightForm">
+  <h2 mat-dialog-title *ngIf="!right.Id">Thêm mới chức năng</h2>
+  <h2 mat-dialog-title *ngIf="right.Id">Thông tin chức năng ID :{{right.Id}}</h2>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên chức năng</mat-label>
+          <input matInput placeholder="Tên chức năng" name="Name" #controlName="ngModel"
+                 [(ngModel)]="right.Name"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên hiển thị</mat-label>
+          <input matInput placeholder="Tên chức năng" name="NameOfMenu" #controlNameOfMenu="ngModel"
+                 [(ngModel)]="right.NameOfMenu"
+                 required>
+          <mat-error *ngIf="controlNameOfMenu.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>chức năng cha</mat-label>
+
+          <mtx-select matInput name="ParentId" #controlParentId="ngModel"
+                      [(ngModel)]="right.ParentId">
+            <mtx-option *ngFor="let opt of rightList" [value]="opt.Id">
+              {{opt.Name }}
+            </mtx-option>
+          </mtx-select>
+          <mat-hint>chọn chức năng cha</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+        <div class="m-y-16" fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-checkbox name='IsLocked' [(ngModel)]="right.IsLocked">Khoá</mat-checkbox>
+        </div>
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Order</mat-label>
+          <input matInput placeholder="SortOrder" name="SortOrder" #controlSortOrder="ngModel"
+                 [(ngModel)]="right.SortOrder" type="number">
+        </mat-form-field>
+
+      </div>
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Url</mat-label>
+          <input matInput placeholder="ActionLink" name="ActionLink" #controlActionLink="ngModel"
+                 [(ngModel)]="right.ActionLink">
+        </mat-form-field>
+
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" cdkFocusInitial
+            [disabled]="rightForm.invalid"
+            (click)="rightForm.form.valid && onSubmit(rightForm.value)">Save</button>
+  </mat-dialog-actions>
+
+</form>

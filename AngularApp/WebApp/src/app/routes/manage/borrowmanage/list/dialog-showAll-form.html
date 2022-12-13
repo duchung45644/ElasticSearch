@@ -1,0 +1,309 @@
+<div>
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+
+    <h1>Xem chi tiết phiếu mượn</h1>
+
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số phiếu</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="showAll.Votes"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="FullName"
+                            #controlFullName="ngModel"
+                            [(ngModel)]="showAll.FullName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Giấy giới thiệu số</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Referral"
+                            #controlReferral="ngModel"
+                            [(ngModel)]="showAll.Referral"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Giấy CMT số</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="CardId"
+                            #controlCardId="ngModel"
+                            [(ngModel)]="showAll.CardId"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Cơ quan, đơn vị</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Name"
+                            #controlName="ngModel"
+                            [(ngModel)]="showAll.Name"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Title"
+                            #controlTitle="ngModel"
+                            [(ngModel)]="showAll.Title"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Phông</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="FondName"
+                            #controlFondName="ngModel"
+                            [(ngModel)]="showAll.FondName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày hẹn trả</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="AppointmentDate"
+                            #controlAppointmentDate="ngModel"
+                            [(ngModel)]="showAll.AppointmentDate"
+                            [matDatepicker]="AppointmentDate"
+                            [value]="AppointmentDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                        <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Nơi gửi</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="SendingPlace"
+                            #controlSendingPlace="ngModel"
+                            [(ngModel)]="showAll.SendingPlace"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người đến mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiverName"
+                            #controlReceiverName="ngModel"
+                            [(ngModel)]="showAll.ReceiverName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày đến mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiveDate"
+                            #controlReceiveDate="ngModel"
+                            [(ngModel)]="showAll.ReceiveDate"
+                            [matDatepicker]="ReceiveDate"
+                            [value]="ReceiveDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                        <mat-datepicker #ReceiveDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tình trạng khi mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ConditionName"
+                            #controlConditionName="ngModel"
+                            [(ngModel)]="showAll.ConditionName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người cho mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiverFullName"
+                            #controlReceiverFullName="ngModel"
+                            [(ngModel)]="showAll.ReceiverFullName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ghi chú khi mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiveNote"
+                            #controlReceiveNote="ngModel"
+                            [(ngModel)]="showAll.ReceiveNote"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th style="width: 200px">Kí hiệu</th>
+                <th style="width: 200px">Tiêu đề</th>
+                <th style="width: 200px">Loại thành phần hồ sơ</th>
+                <th style="width: 200px">Hình thức mượn</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usediary of InforList; let rowIndex = index">
+                <td style="white-space: pre-wrap">{{ rowIndex+1 }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.DocCode }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.Abstract }}</td>
+                <td style="white-space: pre-wrap">{{ usediary.DocTypeId }}</td>
+                <td style="white-space: pre-wrap">
+                    {{ usediary.NameDocumentOriginal }}
+                    <div fxFlex="70" fxFlex.lt-sm="100">
+                        <mat-form-field appearance="outline">
+                            <mtx-select
+                                matInput
+                                name="IsDocumentOriginal"
+                                #controlIsDocumentOriginal="ngModel"
+                                [(ngModel)]="usediary.IsDocumentOriginal"
+                                disabled="true"
+                            >
+                                <mtx-option *ngFor="let opt of FormatList" [value]="opt.FormatId">
+                                    {{opt.FormatName}}
+                                </mtx-option>
+                            </mtx-select>
+                        </mat-form-field>
+                    </div>
+                </td>
+                <td>
+                    <button mat-raised-button color="#fff" (click)="ArchiveView(usediary)">
+                        <mat-icon style="color: darkblue">remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

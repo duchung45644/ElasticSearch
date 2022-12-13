@@ -1,0 +1,161 @@
+<breadcrumb></breadcrumb>
+
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card>
+
+      <div class="form-field-full" fxLayout="row wrap" fxLayoutGap="0px grid">
+        <div fxFlex="35" fxFlex.lt-sm="100">
+          <mat-card-title style="    color: black;
+              text-decoration-line: underline;
+              margin-top: 2px;">NHÓM TÀI SẢN</mat-card-title>
+          <div id="divTree">
+            <mat-form-field appearance="outline" class="mat-mini-input">
+              <mat-label>Tìm kiếm</mat-label>
+              <input matInput placeholder="Từ khoá tìm kiếm" name="search"
+                     autocomplete="off" (keyup)="onKeyUp($event)">
+              <mat-icon matSuffix class="btnResetSearch" (click)="clearSeachTree()">
+                clear</mat-icon>
+            </mat-form-field>
+            <span class="matches"></span>
+            <div id="HouseTree"></div>
+          </div>
+        </div>
+
+        <div fxFlex="65" fxFlex.lt-sm="100">
+          <section class="m-l-8 m-b-8">
+            <form class="form-field-full" #categoriesForm="ngForm" name="categoriesForm">
+              <section class="m-b-8">
+                <button class="m-r-8" mat-stroked-button color="primary"
+                        (click)="newCategories()">
+                  <i class="fa fa-plus-square"></i>
+                  Thêm mới</button>
+                <button class="m-r-8" mat-stroked-button color="primary"
+                        (click)="deleteCategories(categories)" *ngIf="categories.intCategoriesID"><i
+                     class="fa fa-trash-o"></i>Xoá</button>
+                <button mat-raised-button color="primary"
+                        [disabled]="categoriesForm.invalid"
+                        (click)="categoriesForm.form.valid && onSubmit(categoriesForm.value)">
+                  <i class="fa fa-save"></i>Lưu</button>
+              </section>
+
+              <div class="matero-page-header-inner">
+                <mat-card-title *ngIf="!categories.intCategoriesID"
+                                style="font-weight: 400; text-decoration: underline; margin-top: 5px;">
+                  Thêm Mới Nhóm Tài Sản
+                </mat-card-title>
+                <mat-card-title *ngIf="categories.intCategoriesID"
+                                style="font-weight: 400; text-decoration: underline; margin-top: 5px;">
+                  Thông Tin Nhóm Tài Sản: {{categories.txtCategoriesname}}</mat-card-title>
+              </div>
+
+              <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline" class="m-r-8">
+                    <mat-label>Mã nhóm tài sản</mat-label>
+                    <input matInput placeholder="Mã " name="CateID" #controlName="ngModel"
+                           [(ngModel)]="categories.CateID"
+                           required>
+                    <mat-error *ngIf="controlName.errors?.required">
+                      {{'validations.required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline" class="m-r-8">
+                    <mat-label>Tên tài sản </mat-label>
+                    <input matInput placeholder="Tên" name="txtCategoriesname"
+                           #controlName="ngModel"
+                           [(ngModel)]="categories.txtCategoriesname"
+                           required>
+                    <mat-error *ngIf="controlName.errors?.required">
+                      {{'validations.required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tên viết tắt </mat-label>
+                    <input matInput placeholder="Tên viết tắt" name="Abstract"
+                           #controlName="ngModel"
+                           [(ngModel)]="categories.Abstract"
+                           required>
+                    <mat-error *ngIf="controlName.errors?.required">
+                      {{'validations.required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tài sản cha</mat-label>
+
+                    <mtx-select matInput name="ParentID" #controlParentId="ngModel"
+                                [(ngModel)]="categories.ParentID">
+                      <mtx-option *ngFor="let opt of houseList" [value]="opt.intCategoriesID">
+                        {{opt.txtCategoriesname }} - {{opt.CateID}}
+                      </mtx-option>
+                    </mtx-select>
+                    <mat-hint>chọn tài sản cha</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label> Đơn vị đo </mat-label>
+                    <input matInput placeholder="Đơn vị đo" name="Measure" #controlName="ngModel"
+                           [(ngModel)]="categories.Measure"
+                           required>
+                    <mat-error *ngIf="controlName.errors?.required">
+                      {{'validations.required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+                         <mat-form-field appearance="outline"  >
+                          <mat-label> Thời gian sử dụng </mat-label>
+                          <input matInput placeholder="Thời gian sử dụng" type="number" name="TimeUsed" #controlName="ngModel"
+                                 [(ngModel)]="categories.TimeUsed"
+                                 required>
+                          <mat-error *ngIf="controlName.errors?.required">
+                            {{'validations.required' | translate}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div> -->
+                <div fxFlex="50" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Số Thứ Tự</mat-label>
+                    <input matInput placeholder="SortOrder" name="SortOrder"
+                           #controlSortOrder="ngModel"
+                           [(ngModel)]="categories.SortOrder" type="number">
+                  </mat-form-field>
+
+                </div>
+
+                <div fxFlex="100" fxFlex.lt-sm="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Mô tả </mat-label>
+                    <textarea matInput placeholder="Mô tả" name="txtCategoriesDesc"
+                              #controlName="ngModel"
+                              [(ngModel)]="categories.txtCategoriesDesc"></textarea>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+</div>

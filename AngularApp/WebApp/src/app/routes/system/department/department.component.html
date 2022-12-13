@@ -1,0 +1,400 @@
+<breadcrumb></breadcrumb>
+
+<div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+        <mat-card>
+
+            <div class="form-field-full" fxLayout="row wrap" fxLayoutGap="0px grid">
+                <div fxFlex="35" fxFlex.lt-sm="100">
+                    <mat-card-title style="    color: black;
+                    text-decoration-line: underline;
+                    margin-top: 2px;">QUẢN LÝ PHÒNG BAN - CÁN BỘ</mat-card-title>
+                    <div id="divTree">
+                         <mat-form-field appearance="outline"  class="mat-mini-input">
+                            <mat-label>Tìm kiếm</mat-label>
+                            <input matInput placeholder="Từ khoá tìm kiếm" name="search"
+                                   autocomplete="off" (keyup)="onKeyUp($event)">
+                            <mat-icon matSuffix class="btnResetSearch" (click)="clearSeachTree()">
+                                clear</mat-icon>
+                        </mat-form-field>
+                        <span class="matches"></span>
+                        <div id="DepartementTree"></div>
+                    </div>
+                </div>
+                <div fxFlex="65" fxFlex.lt-sm="100">
+                    <section class="m-l-8 m-b-8" *ngIf="!isStaff">
+                        <form class="form-field-full" #departmentForm="ngForm"
+                              name="departmentForm">
+                            <section class="m-b-8">
+                                <button class="m-r-8" mat-stroked-button color="primary"
+                                        (click)="newDepartment()"><i
+                                       class="fa fa-plus-square"></i>Thêm đơn
+                                    vị</button>
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary" (click)="newStaff()"><i
+                                       class="fa fa-user-plus"></i>Thêm cán
+                                    bộ</button>
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary"
+                                        *ngIf="department.Id && department.IsUnit"
+                                        (click)="loadActionOfUnit(department.Id)"><i
+                                       class="fa fa-lock"></i>Giới
+                                    hạn quyền</button>
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary"
+                                        *ngIf="department.Id && department.Id!=1"
+                                        (click)="deleteUnit(department.Id)"><i
+                                       class="fa fa-trash-o"></i>Xoá đơn
+                                    vị</button>
+
+                                <button class="m-r-8" mat-raised-button color="primary"
+                                        [disabled]="departmentForm.invalid"
+                                        (click)="departmentForm.form.valid && onSubmitDepartmentForm(departmentForm.value)"><i
+                                       class="fa fa-save"></i>Lưu</button>
+
+                            </section>
+                            <div class="matero-page-header-inner">
+                                <mat-card-title style="font-weight: 400;text-decoration: underline;">Thông tin <span
+                                          *ngIf="department.IsUnit">đơn
+                                        vị</span>
+                                    <span *ngIf="!department.IsUnit">phòng
+                                        ban</span> <small></small>
+                                </mat-card-title>
+                            </div>
+                            <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Tên đơn vị/phòng ban</mat-label>
+                                        <input matInput
+                                               placeholder="Tên đơn vị/phòng ban"
+                                               name="Name" #controlName="ngModel"
+                                               [(ngModel)]="department.Name"
+                                               required>
+                                        <mat-error
+                                                   *ngIf="controlName.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="100" fxFlex.lt-sm="100"
+                                     *ngIf="department.Id!=1">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Đơn vị/ phòng cha</mat-label>
+                                        <mtx-select matInput name="ParentId"
+                                                    #controlParentId="ngModel"
+                                                    [(ngModel)]="department.ParentId">
+                                            <mtx-option *ngFor="let opt of listParent"
+                                                        [value]="opt.Id">
+                                                {{opt.Name }}
+                                            </mtx-option>
+                                        </mtx-select>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Ký hiệu</mat-label>
+                                        <input matInput name="Ký hiệu"
+                                               #controlAbbName="ngModel"
+                                               [(ngModel)]="department.AbbName"
+                                               required>
+                                        <mat-error
+                                                   *ngIf="controlAbbName.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Mã phòng ban/đơn vị</mat-label>
+                                        <input matInput name="Mã"
+                                               #controlCode="ngModel"
+                                               [(ngModel)]="department.Code"
+                                               required>
+                                        <mat-error
+                                                   *ngIf="controlCode.errors?.required">
+                                            {{'validations.required' | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <div class="m-y-16" fxLayout="row"
+                                         fxLayoutAlign="space-between center">
+                                        <mat-checkbox name='IsUnit'
+                                                      [(ngModel)]="department.IsUnit">Là
+                                            Đơn vị</mat-checkbox>
+                                    </div>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                    <div class="m-y-16" fxLayout="row"
+                                         fxLayoutAlign="space-between center">
+                                        <mat-checkbox name='IsLocked'
+                                                      [(ngModel)]="department.IsLocked">
+                                            Tạm ngừng sử dụng</mat-checkbox>
+                                    </div>
+                                </div>
+
+                                <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Cấp phòng ban</mat-label>
+                                        <mtx-select matInput name="PositionId"
+                                                    #controlPositionId="ngModel"
+                                                    [(ngModel)]="department.Level">
+                                            <mtx-option *ngFor="let opt of listLevel"
+                                                        [value]="opt.Value*1">
+                                                {{opt.DisplayName }}
+                                            </mtx-option>
+                                        </mtx-select>
+                                    </mat-form-field>
+                                </div> -->
+                                <div fxFlex="50" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Thứ tự hiển thị</mat-label>
+                                        <input matInput name="SortOrder"
+                                               #controlSortOrder="ngModel"
+                                               [(ngModel)]="department.SortOrder" type="number"> 
+                                    </mat-form-field>
+                                </div>
+
+                                <div fxFlex="100" fxFlex.lt-sm="100">
+                                     <mat-form-field appearance="outline"  >
+                                        <mat-label>Ghi chú</mat-label>
+                                        <input matInput name="Description"
+                                               #controlDescription="ngModel"
+                                               [(ngModel)]="department.Description">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </form>
+                    </section>
+                    <section class="m-l-8 m-b-8" *ngIf="isStaff">
+                        <form class="form-field-full" #staffForm="ngForm"
+                              name="staffForm">
+                            <section class="m-b-8">
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary" *ngIf="staff.Id"
+                                        (click)="loadRoleOfStaff(staff.Id)"><i
+                                       class="fa fa-lock"></i>Phân quyền sử
+                                    dụng</button>
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary" *ngIf="staff.Id"
+                                        (click)="resetPasswordStaff(staff.Id)"><i
+                                       class="fa fa-retweet"></i>Đặt lại mật
+                                    khẩu</button>
+                                <button class="m-r-8" mat-stroked-button
+                                        color="primary" *ngIf="staff.Id && staff.Id!=1"
+                                        (click)="deleteStaff(staff.Id)"><i
+                                       class="fa fa-trash-o"></i>Xoá cán bộ</button>
+                                <button class="m-r-8" mat-raised-button color="primary"
+                                        [disabled]="staffForm.invalid"
+                                        (click)="staffForm.form.valid && onSubmitStaffForm(staffForm.value)"><i
+                                       class="fa fa-save"></i>Lưu</button>
+
+                            </section>
+                            <div class="matero-page-header-inner">
+                                <mat-card-title *ngIf="staff.Id"> Thông
+                                    tin Cán bộ
+                                </mat-card-title>
+                                <mat-card-title *ngIf="!staff.Id"> Thêm
+                                    mới Cán bộ
+                                </mat-card-title>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="0px grid">
+                                <div fxFlex="30" fxFlex.lt-sm="100" fxFlexAlign="start">
+                                    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+                                        <div fxFlex="100" fxFlex.lt-sm="100"
+                                             *ngIf="staff.Image">
+                                            <img [src]="fileBaseUrl + staff.Image"
+                                                 style="width:90%;" />
+                                        </div>
+                                        <div class="m-y-8" fxFlex="100" fxFlex.lt-sm="100">
+                                            <app-upload
+                                                        (onUploadFinished)="uploadFinished($event)">
+                                            </app-upload>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+                                        <div fxFlex="100" fxFlex.lt-sm="100">
+                                            <div fxLayout="row"
+                                                 fxLayoutAlign="space-between center">
+                                                <mat-checkbox name='IsLocked'
+                                                              [(ngModel)]="staff.IsLocked">
+                                                    Tạm đình chỉ</mat-checkbox>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="100" fxFlex.lt-sm="100">
+                                            <div fxLayout="row"
+                                                 fxLayoutAlign="space-between center">
+                                                <mat-checkbox name='IsRepresentUnit'
+                                                              [(ngModel)]="staff.IsRepresentUnit">
+                                                    Đại diện đơn vị
+                                                </mat-checkbox>
+                                            </div>
+                                        </div>
+
+                                        <div fxFlex="100" fxFlex.lt-sm="100">
+                                            <div fxLayout="row"
+                                                 fxLayoutAlign="space-between center">
+                                                <mat-checkbox name='IsRepresentDepartment'
+                                                              [(ngModel)]="staff.IsRepresentDepartment">
+                                                    Đại diện phòng ban
+                                                </mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxFlex="70" fxFlex.lt-sm="100" fxFlexAlign="start">
+                                    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Tên tài khoản</mat-label>
+                                                <input matInput
+                                                       placeholder="Tên tài khoản"
+                                                       name="UserName"
+                                                       #controlUserName="ngModel"
+                                                       [(ngModel)]="staff.UserName"
+                                                       required [disabled]="staff.Id">
+                                                <mat-error
+                                                           *ngIf="controlUserName.errors?.required">
+                                                    {{'validations.required' | translate}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="25" fxFlex.lt-sm="100"
+                                             *ngIf="!staff.Id">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Mật khẩu</mat-label>
+                                                <input matInput name="Mã"
+                                                       #controlCode="ngModel" disabled
+                                                       [(ngModel)]="staff.Password">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="25" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Mã nhân viên</mat-label>
+                                                <input matInput
+                                                       placeholder="Mã nhân viên"
+                                                       name="Code"
+                                                       #controlCode="ngModel"
+                                                       [(ngModel)]="staff.Code"
+                                                       required>
+                                                <mat-error
+                                                           *ngIf="controlCode.errors?.required">
+                                                    {{'validations.required' | translate}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Họ và tên đệm</mat-label>
+                                                <input matInput
+                                                       placeholder="Họ và tên đêm"
+                                                       name="FirstName"
+                                                       #controlFirstName="ngModel"
+                                                       [(ngModel)]="staff.FirstName"
+                                                       required>
+                                                <mat-error
+                                                           *ngIf="controlFirstName.errors?.required">
+                                                    {{'validations.required' | translate}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Tên</mat-label>
+                                                <input matInput
+                                                       placeholder="Tên"
+                                                       name="LastName"
+                                                       #controlLastName="ngModel"
+                                                       [(ngModel)]="staff.LastName"
+                                                       required>
+                                                <mat-error
+                                                           *ngIf="controlLastName.errors?.required">
+                                                    {{'validations.required' | translate}}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+
+
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Giới tính</mat-label>
+                                                <mtx-select matInput name="Gender"
+                                                            #controlGender="ngModel"
+                                                            [(ngModel)]="staff.Gender">
+                                                    <mtx-option *ngFor="let opt of listGender"
+                                                                [value]="opt.Value*1">
+                                                        {{opt.DisplayName }}
+                                                    </mtx-option>
+                                                </mtx-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div fxFlex="100" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Thuộc đơn vị/Phòng ban
+                                                </mat-label>
+                                                <mtx-select matInput name="DepartmentId"
+                                                            #controlDepartmentId="ngModel"
+                                                            [(ngModel)]="staff.DepartmentId">
+                                                    <mtx-option *ngFor="let opt of listParent"
+                                                                [value]="opt.Id">
+                                                        {{opt.Name }}
+                                                    </mtx-option>
+                                                </mtx-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Chức vụ</mat-label>
+                                                <mtx-select matInput name="PositionId"
+                                                            #controlPositionId="ngModel"
+                                                            [(ngModel)]="staff.PositionId">
+                                                    <mtx-option *ngFor="let opt of listPosition"
+                                                                [value]="opt.Id">
+                                                        {{opt.Name }}
+                                                    </mtx-option>
+                                                </mtx-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Số điện thoại</mat-label>
+                                                <input matInput
+                                                       placeholder="Số điện thoại"
+                                                       name="Phone"
+                                                       #controlLastPhone="ngModel"
+                                                       [(ngModel)]="staff.Phone">
+
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div fxFlex="50" fxFlex.lt-sm="100">
+                                             <mat-form-field appearance="outline"  >
+                                                <mat-label>Số di động (Để liên hệ và gửi
+                                                    SMS)
+                                                </mat-label>
+                                                <input matInput
+                                                       placeholder="Số di động (Để liên hệ và gửi SMS)"
+                                                       name="Mobile"
+                                                       #controlLastMobile="ngModel"
+                                                       [(ngModel)]="staff.Mobile">
+
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </section>
+                </div>
+            </div>
+
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+{
+    "apiBaseUrl": "http://localhost:5000/api/",
+    "fileBaseUrl": "http://localhost:5000/",
+    "baseUrl": "hhttp://localhost:4200/",
+    "pageSize": 20,
+    "importAssetsTemplate": "http://localhost:5000/Resources/Templates/ImportTaiSanTemplate.xlsx"
+}

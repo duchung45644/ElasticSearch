@@ -1,0 +1,23 @@
+<button
+      class="matero-toolbar-button matero-avatar-button"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
+      <img class="matero-avatar" [src]="fileBaseUrl + user.Image" width="32" alt="avatar" />
+      <span class="matero-username" fxHide.lt-sm>{{ user.DisplayName }}</span>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button routerLink="/profile/user" mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>Thông tin tài khoản</span>
+      </button>
+      <button routerLink="/profile/changepassword" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Đổi mật khẩu</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Đăng xuất</span>
+      </button>
+    </mat-menu>

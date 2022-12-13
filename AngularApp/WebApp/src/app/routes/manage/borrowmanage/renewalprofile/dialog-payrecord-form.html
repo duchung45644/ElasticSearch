@@ -1,0 +1,132 @@
+<form class="form-field-full" #payrecordForm="ngForm" name="payrecordForm">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <h2>Trả hồ sơ</h2>
+
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số phiếu</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="payrecord.Votes"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mượn</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="FullName"
+                            #controlFullName="ngModel"
+                            [(ngModel)]="payrecord.FullName"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="Title"
+                            #controlTitle="ngModel"
+                            [(ngModel)]="payrecord.Title"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày mượn </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="BorrowDate"
+                            #controlBorrowDate="ngModel"
+                            [(ngModel)]="payrecord.BorrowDate"
+                            [matDatepicker]="BorrowDate"
+                            [value]="BorrowDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #BorrowDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label> Ngày hẹn trả </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="AppointmentDate"
+                            #controlAppointmentDate="ngModel"
+                            [(ngModel)]="payrecord.AppointmentDate"
+                            [matDatepicker]="AppointmentDate"
+                            [value]="AppointmentDate"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            disabled="true"
+                        />
+                        <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mang trả </mat-label>
+                    </div>
+                    <div fxFlex="50">
+                        <input
+                            matInput
+                            name="ReimburseName"
+                            #controlReimburseName="ngModel"
+                            [(ngModel)]="payrecord.ReimburseName"
+                            style="color: black; background-color: whitesmoke; margin: 5px"
+                            required
+                        />
+                        <mat-error *ngIf="controlReimburseName.errors?.required">
+                            {{'validations.required' | translate}}
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button [disabled]="payrecordForm.invalid" (click)="onSubmit(payrecordForm.value)">Trả hồ sơ</button>
+        <button mat-raised-button mat-dialog-close>Hủy</button>
+    </div>
+</form>

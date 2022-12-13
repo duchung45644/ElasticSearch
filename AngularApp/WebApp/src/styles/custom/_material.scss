@@ -1,0 +1,77 @@
+// Material components style fix
+
+.mat-card {
+  margin-bottom: $gutter;
+ 
+}
+
+.mat-accordion {
+  display: block;
+  margin-bottom: $gutter;
+}
+
+.mat-list-base {
+  position: relative;
+}
+
+.form-field-full {
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.matero-sidemenu a{
+  height: 40px !important;
+}
+.mat-card-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+button i.fa {
+  margin-right: 4px;
+}
+
+button.mat-button-base  {
+  line-height: 30px;
+}
+.mat-card{
+  font-family: "Roboto Condensed",sans-serif;
+  padding: 6px !important;
+}
+.mat-icon-button{
+  padding: 0px;
+  min-width: 0px;
+  width: 39px;
+  height: 30px !important;
+  line-height: 30px !important;
+}
+.mat-mini-input {
+      .mat-form-field-wrapper{
+        padding: 0px; margin: 0 !important;
+      }
+      .mat-form-field-infix {
+        padding: 4px 0px !important;
+    }
+    .mat-form-field-label {
+        top: 1em!important;
+    }
+    &.mat-form-field-can-float {
+      &.mat-form-field-should-float .mat-form-field-label,
+      .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+        transform: translateY(-0.59373em) scale(0.75) !important;
+      }
+  }
+}
+
+.mat-form-field-infix{
+  width: 85px !important;
+}
+.row1{
+  display: block !important;
+}

@@ -1,0 +1,64 @@
+<form class="form-field-full" #provinceForm="ngForm" name="provinceForm">
+  <a style="float: right; margin-top: -10px;" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+</a>
+  <h2 mat-dialog-title *ngIf="!province.Id" style="font-weight: 400;text-decoration: underline;">Thêm Mới Tỉnh/Thành</h2>
+  <h2 mat-dialog-title *ngIf="province.Id" style="font-weight: 400;text-decoration: underline;">Thông Tin Tỉnh/Thành: {{province.Name}}</h2>
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên </mat-label>
+          <input matInput placeholder="Tên " name="Name" #controlName="ngModel"
+                 [(ngModel)]="province.Name"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Mã</mat-label>
+          <input matInput placeholder="Mã" name="Code" #controlCode="ngModel"
+                 [(ngModel)]="province.Code"
+                 required>
+          <mat-error *ngIf="controlCode.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Mã bưu điện</mat-label>
+          <input matInput placeholder="Mã bưu điện" name="VnPostCode" #controlDesciption="ngModel"
+                 [(ngModel)]="province.VnPostCode">
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-label>&nbsp;</mat-label>
+          <mat-checkbox matInput name="IsLocked" [(ngModel)]="province.IsLocked">Khoá
+          </mat-checkbox>
+      </div>
+
+      <div fxFlex="100" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Ghi chú</mat-label>
+          <textarea matInput placeholder="" name="Desciption" #controlDesciption="ngModel"
+                [(ngModel)]="province.Desciption"></textarea>
+          </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="text-right" >
+    <button mat-raised-button color="primary" cdkFocusInitial
+            [disabled]="provinceForm.invalid"
+            (click)="provinceForm.form.valid && onSubmit(provinceForm.value)">Lưu</button>
+    </div>
+
+</form>

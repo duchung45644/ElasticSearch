@@ -1,0 +1,303 @@
+<div>
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+
+    <h1>Xem chi tiết</h1>
+
+    <div fxLayout="row" fxLayoutGap="0px">
+        <div fxFlex="50" class="m-r-8">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Số phiếu</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Votes"
+                            #controlVotes="ngModel"
+                            [(ngModel)]="borrowDetails.Votes"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="FullName"
+                            #controlFullName="ngModel"
+                            [(ngModel)]="borrowDetails.FullName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Giấy giới thiệu số</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Referral"
+                            #controlReferral="ngModel"
+                            [(ngModel)]="borrowDetails.Referral"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Giấy CMT số</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="CardId"
+                            #controlCardId="ngModel"
+                            [(ngModel)]="borrowDetails.CardId"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Cơ quan, đơn vị</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Name"
+                            #controlName="ngModel"
+                            [(ngModel)]="borrowDetails.Name"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Hồ sơ</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="Title"
+                            #controlTitle="ngModel"
+                            [(ngModel)]="borrowDetails.Title"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Phông</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="FondName"
+                            #controlFondName="ngModel"
+                            [(ngModel)]="borrowDetails.FondName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày hẹn trả</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="AppointmentDate"
+                            #controlAppointmentDate="ngModel"
+                            [(ngModel)]="borrowDetails.AppointmentDate"
+                            [matDatepicker]="AppointmentDate"
+                            [value]="AppointmentDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                        <mat-datepicker #AppointmentDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Nơi gửi</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="SendingPlace"
+                            #controlSendingPlace="ngModel"
+                            [(ngModel)]="borrowDetails.SendingPlace"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="50">
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người đến mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiverName"
+                            #controlReceiverName="ngModel"
+                            [(ngModel)]="borrowDetails.ReceiverName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ngày đến mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiveDate"
+                            #controlReceiveDate="ngModel"
+                            [(ngModel)]="borrowDetails.ReceiveDate"
+                            [matDatepicker]="ReceiveDate"
+                            [value]="ReceiveDate"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                        <mat-datepicker #ReceiveDate type="date"></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Tình trạng khi mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ConditionName"
+                            #controlConditionName="ngModel"
+                            [(ngModel)]="borrowDetails.ConditionName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Người cho mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiverFullName"
+                            #controlReceiverFullName="ngModel"
+                            [(ngModel)]="borrowDetails.ReceiverFullName"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="0px" class="m-b-8">
+                <div fxFlex="100">
+                    <div fxFlex="30">
+                        <mat-label>Ghi chú khi mượn</mat-label>
+                    </div>
+                    <div fxFlex="70">
+                        <input
+                            matInput
+                            name="ReceiveNote"
+                            #controlReceiveNote="ngModel"
+                            [(ngModel)]="borrowDetails.ReceiveNote"
+                            style="color: black; background-color: whitesmoke"
+                            disabled="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width: 250px">Kí hiệu</th>
+                <th style="width: 250px">Tiêu đề</th>
+                <th style="width: 250px">Loại thành phần hồ sơ</th>
+                <th style="width: 250px">Hình thức mượn</th>
+                <th style="width: 200px">Chức năng</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let opt of documentList; let rowIndex = index">
+                <td>{{opt.DocCode}}</td>
+                <td>{{opt.Abstract}}</td>
+                <td>{{opt.DocName}}</td>
+                <td>{{opt.AgreeStatus==1?"Bản gốc":opt.BorrowType==2?"Bản điện tử":"Cả 2 bản"}}</td>
+                <td>
+                    <button
+                        mat-button
+                        color="primary"
+                        title="Xem chi tiết hồ sơ"
+                        (click)="viewDetails(opt.DocumentArchiveId)"
+                    >
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</div>

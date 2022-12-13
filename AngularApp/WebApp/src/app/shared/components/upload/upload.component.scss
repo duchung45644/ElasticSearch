@@ -1,0 +1,23 @@
+.upload{
+    font-weight:bold;
+    color:#28a745;
+    margin-left: 15px;
+    line-height: 36px;
+}
+.upload_group{
+    display: flex;
+    clear: both;
+    float: left;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    line-height: 36px;
+}
+.upload_group_button{
+float: left;
+width: 100%;
+}
+.upload_group_message{
+    float: left;
+    width: 100%;
+}

@@ -1,0 +1,42 @@
+<form class="form-field-full" #roleOfStaffForm="ngForm" name="roleOfStaffForm">
+  <h2 mat-dialog-title>Giới hạn quyền cho đơn vị</h2>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+      <div fxFlex="100" fxFlex.lt-sm="100">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tên nhóm quyền</th>
+              <th>Mô tả nhóm quyền</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let role of roles; let rowIndex = index">
+              <td>
+                <div>
+                  <mat-checkbox name="role-Selected-{{rowIndex}}" [(ngModel)]="role.Selected">
+                    </mat-checkbox>
+                </div>
+              </td>
+              <td>{{role.Name}}</td>
+              <td>{{role.Description}}</td>
+              <td>{{role.StatusText}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Đóng</button>
+    <button mat-raised-button color="primary" cdkFocusInitial
+            (click)="onSubmitRoleOfStaff(roleOfStaffForm.value)">Lưu</button>
+  </mat-dialog-actions>
+
+</form>

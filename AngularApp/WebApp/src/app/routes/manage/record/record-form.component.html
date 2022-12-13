@@ -1,0 +1,327 @@
+<form class="form-field-full" #archivedrecordsForm="ngForm" name="archivedrecordsForm">
+    <section>
+        <div fxLayout="row">
+            <div fxFlex="50">
+                <h2 mat-dialog-title style="font-weight: 400; font-size:larger; text-decoration: underline;">Thêm Mới hồ sơ
+                </h2>
+            </div>
+            <div fxFlex="50" class="text-right">
+                <button mat-raised-button color="primary" class="m-r-8" cdkFocusInitial [disabled]="archivedrecordsForm.invalid" (click)="archivedrecordsForm.form.valid && onSubmit(archivedrecordsForm.value)"><i
+                       class="fa fa-save"></i>Lưu</button>
+                <button mat-raised-button color="primary" [routerLink]="['/manage/record']">Quay Lại</button>
+            </div>
+        </div>
+
+
+    </section>
+
+    <div fxLayout="row" class="matero-row">
+
+        <div fxFlex="100" fxFlex.lt-sm="100" class="matero-col">
+            <mat-card>
+                <mat-card-title style="font-weight: 400; font-size:larger; text-decoration: underline;">
+                    Thông tin hồ sơ</mat-card-title>
+                <div fxLayout="row wrap" class="matero-row">
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mã hồ sơ</mat-label>
+                                <input matInput placeholder="Mã hồ sơ" name="FileCode" #controlFileCode="ngModel" [(ngModel)]="record.FileCode" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Số và ký hiệu hồ sơ</mat-label>
+                                <input matInput placeholder="Số và ký hiệu hồ sơ" name="FileNotation" #controlFileNotation="ngModel" [(ngModel)]="record.FileNotation" (ngModelChange)="FileNotationChange(record.FileCatalog,$event)" required>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mục lục số hoặc năm hình thành hồ sơ</mat-label>
+                                <input matInput type="number" placeholder="Mục lục số hoặc năm hình thành hồ sơ" name="FileCatalog" #controlFileCatalog="ngModel" [(ngModel)]="record.FileCatalog" (ngModelChange)="FileCatalogChange($event,record.FileNotation)">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tiêu đề hồ sơ</mat-label>
+                                <input matInput placeholder="Tiêu đề hồ sơ" name="Title" #controlTitle="ngModel" [(ngModel)]="record.Title" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mã phông/công trình/sưu tập lưu trữ</mat-label>
+                                <mtx-select matInput name="FondId" #controlFondId="ngModel" [(ngModel)]="record.FondId " required>
+                                    <mtx-option *ngFor="let opt of fondList" [value]="opt.Id">
+                                        {{opt.FondName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Thời hạn bảo quản</mat-label>
+                                <mtx-select matInput name="Maintenance" #controlMaintenance="ngModel" [(ngModel)]="record.Maintenance ">
+                                    <mtx-option *ngFor="let opt of maintenanceList" [value]="opt.CategoryId">
+                                        {{opt.Name }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Chế độ sử dụng</mat-label>
+                                <mtx-select matInput name="Rights" #controlRights="ngModel" [(ngModel)]="record.Rights ">
+                                    <mtx-option *ngFor="let opt of rightsList" [value]="opt.CategoryId">
+                                        {{opt.Name }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ngôn ngữ</mat-label>
+                                <mtx-select matInput name="Language" #controlLanguage="ngModel" [(ngModel)]="record.Language ">
+                                    <mtx-option *ngFor="let opt of languageList" [value]="opt.CategoryId">
+                                        {{opt.Name }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Thời gian bắt đầu</mat-label>
+                                <input matInput name="StartDate" #controlStartDate="ngModel" [(ngModel)]="record.StartDate" [matDatepicker]="StartDate" [value]="StartDate">
+                                <mat-datepicker-toggle [for]="StartDate" matSuffix>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #StartDate type="date"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Thời gian kết thúc</mat-label>
+                                <input matInput name="CompleteDate" #controlCompleteDate="ngModel" [(ngModel)]="record.CompleteDate" [matDatepicker]="CompleteDate" [value]="CompleteDate" (ngModelChange)="CompareDate()">
+                                <mat-datepicker-toggle [for]="CompleteDate" matSuffix>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #CompleteDate type="date"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tác giả</mat-label>
+                                <input matInput placeholder="Tác giả" name="RecordContent" #controlRecordContent="ngModel" [(ngModel)]="record.RecordContent">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tổng số văn bản trong hồ sơ</mat-label>
+                                <input matInput placeholder="Tổng số văn bản trong hồ sơ" name="TotalDoc" #controlTotalDoc="ngModel" [(ngModel)]="record.TotalDoc">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ký hiệu thông tin</mat-label>
+                                <input matInput placeholder="Ký hiệu thông tin" name="InforSign" #controlInforSign="ngModel" [(ngModel)]="record.InforSign">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Từ khóa</mat-label>
+                                <input matInput placeholder="Từ khóa" name="Keyword" #controlKeyword="ngModel" [(ngModel)]="record.Keyword">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Số lượng tờ</mat-label>
+                                <input matInput placeholder="Số lượng tờ" name="TotalPaper" #controlTotalPaper="ngModel" [(ngModel)]="record.TotalPaper">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Số lượng trang</mat-label>
+                                <input matInput placeholder="Số lượng trang" name="PageNumber" #controlPageNumber="ngModel" [(ngModel)]="record.PageNumber">
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tình trạng vật lý</mat-label>
+                                <mtx-select matInput name="Format" #controlFormat="ngModel" [(ngModel)]="record.Format " required>
+                                    <mtx-option *ngFor="let opt of ConditionList" [value]="opt.Id">
+                                        {{opt.ConditionName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ngày đưa vào kho lưu trữ</mat-label>
+                                <input placeholder="Ngày đưa vào kho lưu trữ" matInput
+                                       name="ArchiveDate"
+                                       #controlArchiveDate="ngModel"
+                                       [(ngModel)]="record.ArchiveDate"
+                                       [matDatepicker]="ArchiveDate" [value]="ArchiveDate">
+                                <mat-datepicker-toggle [for]="ArchiveDate" matSuffix>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #ArchiveDate type="date"></mat-datepicker>
+                            </mat-form-field>
+                        </div> -->
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Cán bộ tiếp nhận lưu trữ</mat-label>
+                                <mtx-select matInput name="ReceptionArchiveId" #controlReceptionArchiveId="ngModel" [(ngModel)]="record.ReceptionArchiveId " required>
+                                    <mtx-option *ngFor="let opt of StaffList" [value]="opt.Id">
+                                        {{opt.DisplayName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Cán bộ phụ trách</mat-label>
+                                <mtx-select matInput name="InChargeStaffId" #controlInChargeStaffId="ngModel" [(ngModel)]="record.InChargeStaffId " required>
+                                    <mtx-option *ngFor="let opt of StaffList" [value]="opt.Id">
+                                        {{opt.DisplayName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <mat-card-title style="font-weight: 400; font-size:larger; text-decoration: underline;">
+                        Thông tin lưu trữ</mat-card-title>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nơi lưu trữ</mat-label>
+                                <mtx-select matInput name="WareHouseId" #controlWareHouseId="ngModel" [(ngModel)]="record.WareHouseId " (ngModelChange)="getShelftByWarehouse($event)" required>
+                                    <mtx-option *ngFor="let opt of warehouseList" [value]="opt.Id">
+                                        {{opt.Name }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Kệ hồ sơ</mat-label>
+                                <mtx-select matInput name="ShelfId" #controlShelfId="ngModel" [(ngModel)]="record.ShelfId " notFoundText="Không có dữ liệu" (ngModelChange)="getBoxByShelf($event)">
+                                    <mtx-option *ngFor="let opt of shelfList" [value]="opt.Id">
+                                        {{opt.ShelfName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Hộp hồ sơ</mat-label>
+                                <mtx-select matInput name="BoxId" #controlBoxId="ngModel" [(ngModel)]="record.BoxId " notFoundText="Không có dữ liệu">
+                                    <mtx-option *ngFor="let opt of BoxList" [value]="opt.Id">
+                                        {{opt.BoxName }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nguồn</mat-label>
+                                <input matInput type="number" placeholder="Nguồn" name="ReceptionFrom" #controlReceptionFrom="ngModel" [(ngModel)]="record.ReceptionFrom">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Người chuyển lưu trữ</mat-label>
+                                <input matInput placeholder="Người chuyển lưu trữ" name="TransferStaff" #controlTransferStaff="ngModel" [(ngModel)]="record.TransferStaff">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100" fxLayoutGap="8px grid">
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Số lượng bản lưu trữ</mat-label>
+                                <input matInput placeholder="Số lượng bản lưu trữ" name="NumberOfCopy" #controlNumberOfCopy="ngModel" [(ngModel)]="record.NumberOfCopy">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Lĩnh vực hồ sơ</mat-label>
+                                <mtx-select matInput name="DocFileId" #controlDocFileId="ngModel" [(ngModel)]="record.DocFileId " required>
+                                    <mtx-option *ngFor="let opt of FieldList" [value]="opt.Id">
+                                        {{opt.Name }}
+                                    </mtx-option>
+                                </mtx-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Các loại hình tài liệu khác</mat-label>
+                                <input matInput placeholder="Các loại hình tài liệu khác" name="OtherType" #controlOtherType="ngModel" [(ngModel)]="record.OtherType">
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="25">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phiên bản</mat-label>
+                                <input matInput placeholder="Phiên bản" name="Version" #controlVersion="ngModel" [(ngModel)]="record.Version">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100">
+                        <div fxFlex="50">
+                            <mat-label class="m-r-8">Là bản gốc</mat-label>
+                            <mat-checkbox matInput name="IsDocumentOriginal" [(ngModel)]="record.IsDocumentOriginal"></mat-checkbox>
+                        </div>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.lt-sm="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ghi chú</mat-label>
+                            <textarea matInput placeholder="" name="Description" #controlDescription="ngModel" [(ngModel)]="record.Description" rows="5"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card>
+
+        </div>
+    </div>
+</form>

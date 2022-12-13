@@ -1,0 +1,17 @@
+<breadcrumb></breadcrumb>
+
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="Phê duyệt - Từ chối">
+        <app-approval-refuse *ngIf="status == 2"></app-approval-refuse>
+    </mat-tab>
+    <mat-tab label="Mượn - Trả - Gia hạn">
+        <app-borrow-return-extend-document *ngIf="status == 3"></app-borrow-return-extend-document>
+    </mat-tab>
+    <mat-tab label="Danh sách phiếu mượn">
+        <!-- <app-document-return-history *ngIf="status == 4"></app-document-return-history> -->
+        <app-borrow-slip-list *ngIf="status == 4"></app-borrow-slip-list>
+    </mat-tab>
+    <mat-tab label="Lịch sử trả hồ sơ">
+        <app-document-return-history *ngIf="status == 5"></app-document-return-history>
+    </mat-tab>
+</mat-tab-group>

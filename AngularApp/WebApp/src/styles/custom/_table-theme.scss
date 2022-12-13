@@ -1,0 +1,103 @@
+// Example for custom theming
+
+@mixin custom-table-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $background   : map-get($theme, "background");
+  $foreground   : map-get($theme, "foreground");
+
+  $row-hover-bg: mat-color($mat-indigo, 50);
+  $row-odd-bg  : mat-color($mat-gray, 100);
+
+  $row-hover-bg-dark: mat-color($mat-blue-gray, 900);
+  $row-odd-bg-dark  : lighten(mat-color($mat-gray, 900), 10%);
+
+  mtx-grid.mtx-grid {
+    .mat-table {
+      &.mat-table-striped {
+        .mat-row-odd {
+          background-color: if($is-dark-theme, $row-odd-bg-dark, $row-odd-bg);
+        }
+      }
+
+      &.mat-table-hover {
+        .mat-row {
+          &:hover {
+            background-color: if($is-dark-theme, $row-hover-bg-dark, $row-hover-bg);
+          }
+        }
+      }
+
+      .mat-row {
+        &.selected {
+          background-color: if($is-dark-theme, $row-hover-bg-dark, $row-hover-bg);
+        }
+      }
+    }
+  }
+}
+
+.mtx-grid .mtx-grid-checkbox-cell {
+  flex           : none;
+  justify-content: center;
+  min-width      : 20px !important;
+  width          : 20px !important;
+}
+
+.mtx-grid .mtx-grid-checkbox-cell .mat-checkbox {
+  display: flex;
+  height : 13px !important;
+}
+
+.mat-checkbox-inner-container {
+  display    : inline-block;
+  height     : 13px !important;
+  line-height: 0;
+
+  order         : 0;
+  position      : relative;
+  vertical-align: middle;
+  white-space   : nowrap;
+  width         : 13px !important;
+  flex-shrink   : 0;
+}
+
+.mtx-grid .mtx-grid-layout {
+  display : flex;
+  flex    : 1 1 auto;
+  overflow: hidden !important;
+}
+
+.mtx-grid .mat-table-sticky-right {
+  text-align: center;
+}
+
+.mat-checkbox-layout {
+  user-select   : none;
+  cursor        : inherit;
+  align-items   : baseline;
+  vertical-align: middle;
+  display       : inline-flex;
+  white-space   : nowrap;
+  height        : 5px;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 48px !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 0.9em 0 !important;
+}
+.mat-card-title {
+  display: block;
+  margin-bottom: 11px;
+  margin-top: -8px;
+}
+
+element.style {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0px -8px -8px 0px;
+  flex-direction: row;
+  display: flex;
+   margin-top: 39px !important;
+}

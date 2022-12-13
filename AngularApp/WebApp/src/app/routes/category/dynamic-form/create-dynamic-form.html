@@ -1,0 +1,25 @@
+<h2 mat-dialog-title *ngIf="!model.Id">Thêm mới form</h2>
+<h2 mat-dialog-title *ngIf="model.Id">Cập nhật thông tin form :{{model.Id}}</h2>
+
+<div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+
+
+        <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="fields">
+            <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+            </formly-form>
+            <div class="text-right">
+                
+                <button type="button" class="m-r-8" mat-raised-button color="primary" 
+                        [disabled]="!form.valid" (click)="viewformly()">Test</button>
+                <button class="m-r-8" mat-raised-button color="primary" cdkFocusInitial
+                        [disabled]="!form.valid">Lưu</button>
+                <button mat-raised-button mat-dialog-close>Đóng</button>
+            
+              </div>
+        </form>
+
+
+
+    </div>
+</div>

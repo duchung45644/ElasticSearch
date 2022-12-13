@@ -1,0 +1,66 @@
+<breadcrumb></breadcrumb>
+
+<section>
+  <div fxLayout="row wrap" fxLayoutGap="0px grid" class="m-b-8">
+    <div fxFlex="100" fxFlex.lt-sm="100">
+      <button class="m-r-8" mat-stroked-button color="primary"
+              (click)="newFormly()"><i
+           class="fa fa-plus-square"></i>Thêm Mới
+      </button>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [cellTemplate]="{ IsLocked: lockTpl }"
+          [loading]="isLoading"
+          [multiSelectable]="false"
+          [rowSelectable]="false"
+          [rowHover]="true"
+          [rowStriped]="false"
+          [showToolbar]="true"
+          [columnMenuButtonText] = "'Cột Hiển Thị'"
+          [toolbarTitle]="'Danh Sách Form'"
+          [columnHideable]="true"
+          [columnMovable]="true"
+          [pageOnFront]="false"
+          [showPaginator]="false"
+          
+          [noResultText] = "'Không có dữ liệu'">
+
+</mtx-grid>
+<!-- [length]="total"
+          [pageIndex]="query.PageIndex"
+          [pageSize]="query.PageSize"
+
+          [pageSizeOptions]="[10,20,50,100]"
+          (page)="getNextPage($event)"
+          (sortChange)="changeSort($event)"
+          (rowSelectionChange)="rowSelectionChangeLog($event)" -->
+
+<ng-template #lockTpl let-row let-index="index" let-col="colDef">
+  <mat-slide-toggle [checked]="row.IsLocked" disabled="true"></mat-slide-toggle>
+</ng-template>
+
+
+
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="fields">
+      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+      </formly-form>
+      <button type="submit" class="btn btn-primary submit-button"
+              [disabled]="!form.valid">Submit</button>
+    </form>
+
+
+  </div>
+</div>

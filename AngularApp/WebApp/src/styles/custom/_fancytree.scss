@@ -1,0 +1,77 @@
+/** Custom table style not with theme */
+
+.fancytree-container span.fancytree-title {
+  font-family: "Roboto Condensed",sans-serif;
+}
+
+
+span.fancytree-title {
+    min-height: 1rem;
+    margin: 0 0 0 5px;
+  }
+  
+  ul.fancytree-container {
+    font-size: 0.875rem;
+    border: none  !important;
+  }
+  
+  ul.fancytree-container:focus{
+    border: none  !important;
+  }
+  
+    ul.fancytree-container
+    ul.fancytree-container ul {
+      font-size: 0.875rem;
+    }
+  
+  span.fancytree-node {
+    min-height: 1.4rem;
+  }
+  
+  span.fancytree-icon {
+    color: #3f51b5 !important;
+  }
+  
+  .fancytree-icon:after {
+    line-height: 1.1;
+    font-size: 1.05rem;
+  }
+  
+  .fancytree-plain span.fancytree-active span.fancytree-title, .fancytree-plain span.fancytree-selected span.fancytree-title:hover {
+    background-color: #3f51b5;
+    color: #fff !important;
+  }
+  
+  // .fancytree-plain span.fancytree-selected span.fancytree-title {
+  //   background-color: #3f51b5;
+  //   color: #fff !important;
+  // }
+  
+  // .fancytree-container span.fancytree-checkbox {
+  //   color: #000;
+  // }
+  
+  // span.fancytree-checkbox {
+  //   background-image: none;
+  // } 
+  .fancytree-container .icon-color {
+    color: #3f51b5 !important;
+}
+.fancytree-container .css_staff .fancytree-title{
+    color:#3f51b5;
+  }
+  .fancytree-container:focus {
+    outline: 0;
+}
+  .fancytree-container .fancytree-title{
+    width: 80% !important;
+  white-space: pre-wrap;
+  }
+
+  #divTree .btnResetSearch{
+    cursor: pointer;
+  }
+
+  .fancytree-container .fancytree-title mark {
+    background-color: #ffed50 i !important;
+}

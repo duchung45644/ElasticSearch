@@ -1,0 +1,66 @@
+<form class="form-field-full" #houseForm="ngForm" name="houseForm">
+    <h2 mat-dialog-title *ngIf="!house.intCategoriesID">Thêm mới </h2>
+    <h2 mat-dialog-title *ngIf="house.intCategoriesID">Thông tin :{{house.intCategoriesID}}</h2>
+    <mat-dialog-content>
+        <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tên loại TS </mat-label>
+                    <input matInput placeholder="Tên" name="txtCategoriesname" #controlName="ngModel" [(ngModel)]="house.txtCategoriesname" required>
+                    <mat-error *ngIf="controlName.errors?.required">
+                        {{'validations.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Mã loại TS</mat-label>
+                    <input matInput placeholder="Mã" name="CateID" #controlCode="ngModel" [(ngModel)]="house.CateID" required>
+                    <mat-error *ngIf="controlCode.errors?.required">
+                        {{'validations.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Mô tả</mat-label>
+                    <input matInput placeholder="" name="txtCategoriesDesc" #controlDesciption="ngModel" [(ngModel)]="house.txtCategoriesDesc">
+                </mat-form-field>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tên viết tắt</mat-label>
+                    <input matInput placeholder="" name="Abstract" #controlDesciption="ngModel" [(ngModel)]="house.Abstract">
+                </mat-form-field>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Đơn vị Đo</mat-label>
+                    <input matInput placeholder="" name="Measure" #controlDesciption="ngModel" [(ngModel)]="house.Measure">
+                </mat-form-field>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Thời gian sử dụng(năm)</mat-label>
+                    <input matInput placeholder="" name="TimeUsed" #controlDesciption="ngModel" [(ngModel)]="house.TimeUsed">
+                </mat-form-field>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tỉ lệ tính hao mòn(%năm)</mat-label>
+                    <input matInput placeholder="" name="AttritionRate" #controlDesciption="ngModel" [(ngModel)]="house.AttritionRate">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" cdkFocusInitial [disabled]="houseForm.invalid" (click)="houseForm.form.valid && onSubmit(houseForm.value)">Save</button>
+    </mat-dialog-actions>
+
+</form>

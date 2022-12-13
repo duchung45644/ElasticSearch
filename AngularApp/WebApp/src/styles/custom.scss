@@ -1,0 +1,61 @@
+@import './custom/mixins';
+@import './custom/material';
+@import './custom/table';
+@import './custom/fancytree';
+
+
+
+.upload{
+    font-weight:bold;
+    color:#28a745;
+    margin-left: 15px;
+    line-height: 36px;
+  }
+  .upload_group{
+    display: flex;
+    clear: both;
+    float: left;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    line-height: 36px;
+  }
+  .upload_group_button{
+  float: left;
+  width: 100%;
+  }
+  .upload_group_message{
+    float: left;
+    width: 100%;
+  }
+  .array_file table{
+    width: 100%;
+  }      
+  .array_file table  tr td {
+    border: 1px solid #eee;
+    border-collapse: collapse;
+  }
+  .array_file .mat-form-field-appearance-outline .mat-form-field-outline {
+    display: none !important;
+  }
+  
+  .array_file  .mat-form-field-wrapper.ng-tns-c115-50 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .array_file .mat-form-field-flex.ng-tns-c115-50 {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .array_file .mat-form-field-infix.ng-tns-c115-50 {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .array_file  .mat-form-field-infix.ng-tns-c115- {
+    padding: 0 !important;
+  }
+  
+  .array_file  .filename{color: blue;}

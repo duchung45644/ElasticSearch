@@ -1,0 +1,174 @@
+<breadcrumb></breadcrumb>
+
+<div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+        <mat-card>
+
+
+            <div fxLayout="row wrap" class="matero-row">
+                <div fxLayout="row wrap" fxLayoutGap="0px grid">
+
+                    <div fxFlex="40" fxFlex.lt-sm="100">
+                        <mat-card-title style="    color: black;
+                        text-decoration-line: underline;
+                        margin-top: 2px;">DANH SÁCH CHỨC NĂNG</mat-card-title>
+                        <div id="RightTree"></div>
+                    </div>
+                    <div fxFlex="60" fxFlex.lt-sm="100">
+                        <section class="m-l-8 m-b-8">
+
+                            <form class="form-field-full" #rightForm="ngForm" name="rightForm">
+                                <section class="m-b-8">
+                                    <button class="m-r-8" mat-stroked-button color="primary"
+                                            (click)="newRight()">
+                                        <i class="fa fa-plus-square"></i>
+                                        Thêm mới</button>
+                                    <button class="m-r-8" mat-stroked-button color="primary"
+                                            (click)="deleteRight(right)" *ngIf="right.Id"><i
+                                           class="fa fa-trash-o"></i>Xoá</button>
+                                    <button mat-raised-button color="primary"
+                                            [disabled]="rightForm.invalid"
+                                            (click)="rightForm.form.valid && onSubmit(rightForm.value)"><i
+                                           class="fa fa-save"></i>Lưu</button>
+
+                                </section>
+                                <mat-card-title *ngIf="!right.Id" style="font-weight: 400;text-decoration: underline;">Thêm mới chức năng
+                                </mat-card-title>
+                                <mat-card-title *ngIf="right.Id" style="font-weight: 400;text-decoration: underline;">Thông tin chức năng ID
+                                    :{{right.Id}}</mat-card-title>
+                                <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                         <mat-form-field appearance="outline"  >
+                                            <mat-label>Tên chức năng</mat-label>
+                                            <input matInput placeholder="Tên chức năng" name="Name"
+                                                   #controlName="ngModel"
+                                                   [(ngModel)]="right.Name"
+                                                   required>
+                                            <mat-error *ngIf="controlName.errors?.required">
+                                                {{'validations.required' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                         <mat-form-field appearance="outline"  >
+                                            <mat-label>Tên hiển thị</mat-label>
+                                            <input matInput placeholder="Tên chức năng"
+                                                   name="NameOfMenu"
+                                                   #controlNameOfMenu="ngModel"
+                                                   [(ngModel)]="right.NameOfMenu"
+                                                   required>
+                                            <mat-error *ngIf="controlNameOfMenu.errors?.required">
+                                                {{'validations.required' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                         <mat-form-field appearance="outline"  >
+                                            <mat-label>chức năng cha</mat-label>
+
+                                            <mtx-select matInput name="ParentId"
+                                                        #controlParentId="ngModel"
+                                                        [(ngModel)]="right.ParentId">
+                                                <mtx-option *ngFor="let opt of rightList"
+                                                            [value]="opt.Id">
+                                                    {{opt.Name }}
+                                                </mtx-option>
+                                            </mtx-select>
+                                            <mat-hint>chọn chức năng cha</mat-hint>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                        <div class="m-y-16" fxLayout="row"
+                                             fxLayoutAlign="space-between center">
+                                            <mat-checkbox name='IsLocked'
+                                                          [(ngModel)]="right.IsLocked">Khoá
+                                            </mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                         <mat-form-field appearance="outline"  >
+                                            <mat-label>Order</mat-label>
+                                            <input matInput placeholder="SortOrder" name="SortOrder"
+                                                   #controlSortOrder="ngModel"
+                                                   [(ngModel)]="right.SortOrder" type="number">
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-sm="100">
+                                         <mat-form-field appearance="outline"  >
+                                            <mat-label>Url</mat-label>
+                                            <input matInput placeholder="ActionLink"
+                                                   name="ActionLink"
+                                                   #controlActionLink="ngModel"
+                                                   [(ngModel)]="right.ActionLink">
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div fxFlex="100" fxFlex.lt-sm="100">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã quyền</th>
+                                                    <th>Tên quyền</th>
+                                                    <th>
+                                                        <button class="m-r-8" mat-stroked-button
+                                                                color="primary"
+                                                                (click)="addAction()"><i
+                                                               class="fa fa-plus-square"></i></button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let action of right.ListAction;let i = index">
+                                                    <td>
+                                                         <mat-form-field appearance="outline"  >
+
+                                                            <input matInput 
+                                                                   name="Code{{i}}"
+                                                                   #f="ngModel"
+                                                                   [(ngModel)]="action.Code"
+                                                                   required>
+                                                            <mat-error *ngIf="f.invalid">
+                                                                {{'validations.required' |
+                                                                translate}}
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                         <mat-form-field appearance="outline"  >
+                                                            <input matInput
+                                                                   name="Name{{i}}"
+                                                                   #f="ngModel"
+                                                                   [(ngModel)]="action.Name"
+                                                                   required>
+                                                            <mat-error *ngIf="f.invalid">
+                                                                {{'validations.required' |
+                                                                translate}}
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <button class="m-r-8" mat-stroked-button
+                                                                color="primary"
+                                                                (click)="deleteAction(action)"><i
+                                                               class="fa fa-trash-o"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+/** Custom table style not with theme */
+.mtx-grid .mat-cell,
+.mtx-grid .mat-footer-cell,
+.mtx-grid .mat-header-cell {
+    box-sizing: border-box;
+    padding   : 2px 5px !important;
+}
+
+.mtx-grid .mat-header-cell {
+    box-sizing : border-box;
+    padding    : 2px 5px;
+    color: rgb(0 0 0);
+    font-size  : 13px;
+}
+
+tr.mat-header-row {
+    height: 35px !important;
+}
+
+.mtx-grid .mtx-grid-toolbar {
+    align-items    : center;
+    display        : flex;
+    justify-content: space-between;
+    min-height     : 39px !important;
+    padding        : 2px !important;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+    height: 35px !important;
+}
+
+.table th,
+.table td {
+    padding       : 0.25rem;
+    vertical-align: top;
+    border-top    : 1px solid #dee2e6;
+}

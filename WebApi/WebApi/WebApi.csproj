@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>d71dc656-51d5-438a-b709-194bc9c52058</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\Images\**" />
+    <Content Remove="Resources\Images\**" />
+    <EmbeddedResource Remove="Resources\Images\**" />
+    <None Remove="Resources\Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\NoImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0-develop00310" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
+    <PackageReference Include="NetBarcode" Version="1.4.0" />
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Runtime.Caching" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Templates\ExcelAssetsCategoriesTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Templates\ExcelReportAssetsTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Templates\ExcelReportAssetsUnitsTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Templates\ExcelReportInventoryTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Templates\ExcelReportSoTaiSanNoiSuDungTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Templates\ImportTaiSanTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,111 @@
+<!-- <div class="table"></div>
+
+<section>
+    <div fxLayout="row" fxLayoutGap="0px grid">
+        <div fxFlex="100" fxFlex.lt-sm="100">
+            <div fxFlex="30" fxFlex.lt-sm="100">
+                <mat-form-field appearance="outline" class="m-r-8">
+                    <mat-label>Từ Ngày</mat-label>
+                    <input name="DateAddStart" #controlDateAddStart="ngModel"
+                           [(ngModel)]="docofrequest.DateAddStart"
+                           (ngModelChange)="getNodeErrorDateTimeStart($event)"
+                           [matDatepicker]="datePicker" [value]="datePicker" matInput>
+                    <mat-datepicker-toggle matSuffix [for]="datePicker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
+                    <mat-error *ngIf="controlDateAddStart.errors?.required">
+                        {{'validations.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Đến Ngày</mat-label>
+                    <input name="DateAddEnd" #controlDateAddEnd="ngModel"
+                           [(ngModel)]="docofrequest.DateAddEnd"
+                           (ngModelChange)="getNodeErrorDateTimeEnd($event)"
+                           [matDatepicker]="datePicker1" [value]="datePicker1" matInput>
+                    <mat-datepicker-toggle matSuffix [for]="datePicker1">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #datePicker1></mat-datepicker>
+                    <mat-error *ngIf="controlDateAddEnd.errors?.required">
+                        {{'validations.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+
+            <div fxFlex="70" fxFlex.lt-sm="100" class="text-right">
+
+                <button class="m-r-8" mat-stroked-button color="primary" printSectionId="demo" ngxPrint><i
+                    class="fa fa-print" ></i>In báo cáo
+                </button>
+                <button class="m-r-8" mat-stroked-button color="primary"
+                     (click)="StatisticalReportAssets()"><i class="fa fa-file-excel-o"></i>Xuất 
+                     file excel
+                </button>
+
+                <button mat-stroked-button color="basic" (click)="clearsearch()"
+                        style="float: right;">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" class="m-r-8" style="float: right;"
+                        (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+                <mat-form-field appearance="outline" class="mat-mini-input m-r-8"
+                                style="width:10vw; float: right;">
+                    <mat-label>Tìm kiếm</mat-label>
+                    <input matInput [(ngModel)]="query.KeyWord" name="KeyWord">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="demo" style="display: none;">
+    <table class="table table-bordered table-striped" >
+        <thead>
+            <th>Ngày mượn</th>
+            <th>Tên hồ sơ</th>
+            <th>Người mượn</th>
+            <th>Ngày hẹn trả</th>
+            <th>Ngày trả</th>
+            <th>Trạng Thái</th>
+        </thead>
+        <tbody *ngFor="let item of list">
+            <tr>
+                <td>{{item.ReceiveDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{item.Title}}</td>
+                <td>{{item.FullName}}</td>
+                <td>{{item.AppointmentDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{item.ReimburseDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{item.Status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<mtx-grid [data]="list"
+              [columns]="columns"
+              [loading]="isLoading"
+              [multiSelectable]="false"
+              [rowSelectable]="false"
+              [rowHover]="true"
+              [rowStriped]="false"
+              [showToolbar]="true"
+              [columnMenuButtonText]="'Cột Hiển Thị'"
+              [toolbarTitle]="'Sổ theo dõi tài liệu mượn'"
+              [columnHideable]="true"
+              [columnMovable]="true"
+              [pageOnFront]="false"
+              [showPaginator]="true"
+              [length]="total"
+              [pageIndex]="query.PageIndex"
+              [pageSize]="query.PageSize"
+              [pageSizeOptions]="[10,20,50,100]"
+              (page)="getNextPage($event)"
+              (sortChange)="changeSort($event)"
+              (rowSelectionChange)="rowSelectionChangeLog($event)"
+              [noResultText]="'Không có dữ liệu'">
+    </mtx-grid> -->

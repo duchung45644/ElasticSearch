@@ -1,0 +1,118 @@
+
+
+ <form class="form-field-full" #categoriesForm="ngForm" name="categoriesForm">
+  <h2 mat-dialog-title *ngIf="!categories.intCategoriesID">Thêm mới Tài Sản</h2>
+  <h2 mat-dialog-title *ngIf="categories.intCategoriesID">Cập nhật trạng thái :{{categories.intCategoriesID}}</h2>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="0px grid">
+    </div>
+  </mat-dialog-content>
+
+
+
+<!-- <form class="form-field-full" #categoriesForm="ngForm" name="categoriesForm"> -->
+  <!-- <h2 mat-dialog-title *ngIf="!categories.intCategoriesID">Thêm mới </h2> -->
+  <h2 mat-dialog-title *ngIf="categories.intCategoriesID">Thông tin  :{{categories.intCategoriesID}}</h2>
+  <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Mã nhóm tài sản </mat-label>
+          <input matInput placeholder="Mã " name="CateID" #controlName="ngModel"
+                 [(ngModel)]="categories.CateID"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên nhóm tài sản </mat-label>
+          <input matInput placeholder="Tên" name="txtCategoriesname" #controlName="ngModel"
+                 [(ngModel)]="categories.txtCategoriesname"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Mô tả </mat-label>
+          <input matInput placeholder="Mô tả" name="txtCategoriesDesc" #controlName="ngModel"
+                 [(ngModel)]="categories.txtCategoriesDesc"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tên viết tắt </mat-label>
+          <input matInput placeholder="Tên viết tắt" name="Abstract" #controlName="ngModel"
+                 [(ngModel)]="categories.Abstract"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label>Tài sản cha</mat-label>
+
+          <mtx-select matInput name="ParentID" #controlParentId="ngModel"
+                      [(ngModel)]="categories.ParentID">
+            <mtx-option *ngFor="let opt of houseList" [value]="opt.intCategoriesID">
+              {{opt.txtCategoriesname }}
+            </mtx-option>
+          </mtx-select>
+          <mat-hint>chọn tài sản cha</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label> Đơn vị đo </mat-label>
+          <input matInput placeholder="Đơn vị đo" name="Measure" #controlName="ngModel"
+                 [(ngModel)]="categories.Measure"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" fxFlex.lt-sm="100">
+         <mat-form-field appearance="outline"  >
+          <mat-label> Thời gian sử dụng </mat-label>
+          <input matInput placeholder="Thời gian sử dụng" type="number" name="TimeUsed" #controlName="ngModel"
+                 [(ngModel)]="categories.TimeUsed"
+                 required>
+          <mat-error *ngIf="controlName.errors?.required">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-dialog-actions>
+          <button mat-raised-button mat-dialog-close>Close</button>
+          <button mat-raised-button color="primary" cdkFocusInitial
+                  [disabled]="categoriesForm.invalid"
+                  (click)="categoriesForm.form.valid && onSubmit(categoriesForm.value)">Save</button>
+        </mat-dialog-actions>
+      </div>
+
+
+
+
+
+
+    </div> 

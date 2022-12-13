@@ -1,0 +1,35 @@
+<div class="w-full h-full" fxLayout="row wrap">
+    <mat-card class="mat-elevation-z4 m-auto" style="max-width: 380px;padding: 24px !important;">
+
+        <mat-card-subtitle class="text-center">
+            <img src="./assets/images/logo1.jpg" alt="" style="height: 50px;" srcset="">
+        </mat-card-subtitle>
+        <mat-card-title class="text-center m-b-24" style="font-size:24px;font-size: 24px;margin-top: 20px;font-weight: bold;color: #141ed2;">{{'app.title' | translate}}</mat-card-title>
+        <mat-card-title class="text-center m-b-24">{{'login.title' | translate}}</mat-card-title>
+        <form class="form-field-full" [formGroup]="loginForm">
+            <mtx-loader [loading]="loadingContent" color="accent">
+                <mat-form-field appearance="outline" appearance="outline">
+                    <mat-label>{{'login.username' | translate}}</mat-label>
+                    <input matInput placeholder="{{'login.username' | translate}}" formControlName="username" required>
+                    <mat-error *ngIf="username.invalid">
+                        {{'login.please_enter' | translate}} <strong></strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" appearance="outline">
+                    <mat-label>{{'login.password' | translate}}</mat-label>
+                    <input matInput placeholder="{{'login.password' | translate}}" type="password" formControlName="password" required>
+                    <mat-error *ngIf="password.invalid">
+                        {{'login.please_enter' | translate}} <strong></strong>
+                    </mat-error>
+                </mat-form-field>
+                <button class="w-full" style="height: 40px !important;" mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">{{'login.login' | translate}}</button>
+
+            </mtx-loader>
+            <!-- <div class="m-t-16">{{'login.have_no_account' | translate}}?
+        <a routerLink="/auth/register">{{'login.create_one' | translate}}</a>
+      </div> -->
+        </form>
+
+    </mat-card>
+</div>

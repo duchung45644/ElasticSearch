@@ -1,0 +1,93 @@
+<form class="form-field-full">
+    <a style="float: right; margin-top: -10px" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </a>
+    <section>
+        <legend style="text-align: center">Chi tiết thành phần hồ sơ</legend>
+        <hr />
+        <h1>Thông tin hồ sơ</h1>
+    </section>
+    <mat-card>
+        <div fxLayout="row wrap" fxLayoutGap=" 20px grid">
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <table style="margin-bottom: 10px; width: 100%">
+                    <tbody>
+                        <tr style="margin-bottom: 8px">
+                            <td style="border: 1px solid #fff; width: 170px">Tiêu đề</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput style="color: black" placeholder="Tiêu đề hồ sơ" name="Title" #controlTitle="ngModel" [(ngModel)]="record.Title" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Ký hiệu</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="FileNotation" style="color: black" #controlFileNotation="ngModel" [(ngModel)]="record.FileNotation" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Tổng số văn bản trong hồ sơ</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput placeholder="Tổng số văn bản trong hồ sơ" style="color: black" name="TotalDoc" #controlTotalDoc="ngModel" [(ngModel)]="record.TotalDoc" disabled="true" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div fxFlex="50" fxFlex.lt-sm="100">
+                <table style="margin-bottom: 10px; width: 100%">
+                    <tbody>
+                        <tr style="margin-bottom: 10px">
+                            <td style="border: 1px solid #fff; width: 170px">Nơi lưu trữ</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="WarehouseName" #controlWarehouseName="ngModel" style="color: black" [(ngModel)]="record.WareHouseName" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Kệ hồ sơ</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px">
+                                <input matInput name="ShelfName" #controlShelfName="ngModel" style="color: black" [(ngModel)]="record.ShelfName" disabled="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #fff; width: 170px">Hộp hồ sơ</td>
+                            <td style="border: 1px solid #fff; background-color: #f5f5f5; border-radius: 10px" class="ng-binding">
+                                <input matInput name="BoxName" #controlBoxName="ngModel" style="color: black" [(ngModel)]="record.BoxName" disabled="true" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-card>
+    <hr />
+    <section>
+        <div fxLayout="row wrap" fxLayoutGap="0px grid">
+            <div fxFlex="40">
+                <h1>Danh sách thành phần hồ sơ</h1>
+            </div>
+
+            <div fxFlex="60" class="text-right">
+                <!-- <button mat-raised-button color="primary" (click)="CreateDocumentArchive()" class="m-r-8">Thêm mới</button>
+                <button mat-raised-button color="primary" class="m-r-8" (click)="Delete()" [disabled]="disable">Xóa</button> -->
+
+                <mat-form-field appearance="outline" class="mat-mini-input m-r-8" style="width: 10vw">
+                    <mat-label>Từ khoá tìm kiếm</mat-label>
+                    <input matInput [(ngModel)]="query.KeyWord" name="KeyWord" />
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="m-r-8" style="float: right" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <mtx-grid [data]="list" [columns]="columns" [loading]="isLoading" [multiSelectable]="false" [rowSelectable]="false" [rowHover]="true" [length]="total" [rowStriped]="false" [showToolbar]="true" [columnMenuButtonText]="'Cột Hiển Thị'" [columnHideable]="false"
+        [columnMovable]="true" [pageOnFront]="false" [showPaginator]="true" [pageIndex]="query.PageIndex" [pageSize]="query.PageSize" [pageSizeOptions]="[10, 20, 50, 100]" (page)="getNextPage($event)" (sortChange)="changeSort($event)" (rowSelectionChange)="rowselect($event)"
+        [noResultText]="'Không có dữ liệu'">
+    </mtx-grid>
+    <br />
+    <div class="text-right">
+        <button mat-raised-button mat-dialog-close>Đóng</button>
+    </div>
+</form>
