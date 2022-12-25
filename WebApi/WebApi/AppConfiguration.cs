@@ -4,10 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// Elasticsearch
+using Elasticsearch.Net;
+using Nest;
+
 namespace WebApi
 {
     public class AppConfiguration
     {
+
         private readonly IConfiguration Config;
         public AppConfiguration(IConfiguration configuration)
         {

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -15,8 +16,10 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using WebApi.Helper;
+using WebApi.Models.ElasticSearch;
 using WebApi.Repository;
 using WebApi.Services;
+using WebApi.Services.ElasticSearch;
 
 namespace WebApi
 {
@@ -95,6 +98,14 @@ namespace WebApi
                 o.MultipartBodyLengthLimit = int.MaxValue;
                 o.MemoryBufferThreshold = int.MaxValue;
             });
+
+            // ElasticSearch configuration setting
+            
+            //var setting = new ConnectionSettings()              // Do not need to parse any uri because the default uri is localhost:9200
+            //    .DefaultMappingFor<User>(x=>x.IndexName("users")); 
+            //services.AddSingleton<IElasticClient>(new ElasticClient(setting));
+
+            services.AddScoped<IElasticDocumentService, DocumentService>();
 
             services.AddScoped<ICommonRepository, CommonRepository>();
             services.AddScoped<ICommonService, CommonService>();

@@ -53,6 +53,5 @@ namespace WebApi.Models
         public System.Int32? CommuneId { get; set; }
         public System.String SignImage { get; set; }
         public System.String SignPhone { get; set; }
-
     }
 }

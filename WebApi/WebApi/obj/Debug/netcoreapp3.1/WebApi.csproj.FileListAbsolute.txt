@@ -72,3 +72,8 @@ C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\obj\Debug\netcoreapp3.1\WebApi.csproj
 C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\obj\Debug\netcoreapp3.1\WebApi.dll
 C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\obj\Debug\netcoreapp3.1\WebApi.pdb
 C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\obj\Debug\netcoreapp3.1\WebApi.genruntimeconfig.cache
+C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\bin\Debug\netcoreapp3.1\Elasticsearch.Net.dll
+C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\bin\Debug\netcoreapp3.1\Nest.dll
+C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\C_WorkSpace\ElasticSearch\WebApi\WebApi\bin\Debug\netcoreapp3.1\itextsharp.dll

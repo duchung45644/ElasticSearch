@@ -15,6 +15,12 @@ using WebApi.Helper;
 using WebApi.Models;
 using WebApi.Services;
 
+
+using System.Text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using Path = System.IO.Path;
+
 namespace WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -61,6 +67,8 @@ namespace WebApi.Controllers
                         file.CopyTo(stream);
                     }
 
+                    ExtractTextFromPdf(fullPath);
+
                     var filesResult = new UploadFilesResult()
                     {
                         Success = true,
@@ -96,6 +104,8 @@ namespace WebApi.Controllers
                 return Ok(filesResult);
             }
         }
+
+
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult UploadPDF()
         {
@@ -159,6 +169,22 @@ namespace WebApi.Controllers
                 return Ok(filesResult);
             }
         }
+
+        public void ExtractTextFromPdf(string path)
+        {
+            using (PdfReader reader = new PdfReader(path))
+            {
+                StringBuilder text = new StringBuilder();
+                ITextExtractionStrategy Strategy = new iTextSharp.text.pdf.parser.LocationTextExtractionStrategy();
+                 
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    string page = "";
+                    page = PdfTextExtractor.GetTextFromPage(reader, i, Strategy);
+                }
+            }
+        }
+
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult UploadFile(string subPath)
         {
@@ -227,8 +253,6 @@ namespace WebApi.Controllers
                 return Ok(filesResult);
             }
         }
-
-
 
         //[HttpPost, DisableRequestSizeLimit]
         //public IActionResult ImportAssets()

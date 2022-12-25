@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "HQS5mOCdhCAMbhFMeNuEalbonWvn2P0ODOsdIDIHo1NbQNQLzHSujOBqlhS/cco6MPVMMoAcO7+LXPyt31XHAg==",
+  "dgSpecHash": "xjBYADrdV1DTB8forOEEIn2sdnbcHoBHmu5GtNgX43J9nFTBJq4Ll/qTLqrO2/KF8Uhu4lItw4x7QZYg1yaBeA==",
   "success": true,
   "projectFilePath": "C:\\C_WorkSpace\\ElasticSearch\\WebApi\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\guluGulu\\.nuget\\packages\\bouncycastle\\1.8.9\\bouncycastle.1.8.9.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\closedxml\\0.95.4\\closedxml.0.95.4.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\documentformat.openxml\\2.7.2\\documentformat.openxml.2.7.2.nupkg.sha512",
+    "C:\\Users\\guluGulu\\.nuget\\packages\\elasticsearch.net\\7.17.5\\elasticsearch.net.7.17.5.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\exceldatareader\\3.7.0-develop00310\\exceldatareader.3.7.0-develop00310.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\exceldatareader.dataset\\3.7.0-develop00310\\exceldatareader.dataset.3.7.0-develop00310.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\excelnumberformat\\1.0.10\\excelnumberformat.1.0.10.nupkg.sha512",
+    "C:\\Users\\guluGulu\\.nuget\\packages\\itextsharp\\5.5.13.3\\itextsharp.5.5.13.3.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.aspnet.cors\\5.2.7\\microsoft.aspnet.cors.5.2.7.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
@@ -27,6 +30,7 @@
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\guluGulu\\.nuget\\packages\\nest\\7.17.5\\nest.7.17.5.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\netbarcode\\1.4.0\\netbarcode.1.4.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
@@ -53,14 +57,14 @@
     "C:\\Users\\guluGulu\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
-    "C:\\Users\\guluGulu\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
+    "C:\\Users\\guluGulu\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.data.sqlclient\\4.8.2\\system.data.sqlclient.4.8.2.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
-    "C:\\Users\\guluGulu\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.3.0\\system.diagnostics.diagnosticsource.4.3.0.nupkg.sha512",
+    "C:\\Users\\guluGulu\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
@@ -118,6 +122,26 @@
     "C:\\Users\\guluGulu\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "BouncyCastle",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
